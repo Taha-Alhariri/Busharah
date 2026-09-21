@@ -883,6 +883,9 @@ const store = {
 const P = {
   data: null,
   token: null,
+  /* من أين جاء الرمز: "link" من إيميل، أو "store" من جلسة محفوظة.
+     يحدّد ما نفعله لو فشل — راجع loadReport. */
+  source: null,
   tab: "matched",     // matched | rejected | applied
   sort: "date",       // date | score
   q: "",
@@ -1014,6 +1017,7 @@ async function submitCode(){
       return;
     }
     P.token = d.token;
+    P.source = "link";
     store.set({ token: d.token, email: A.email });
     openPortal();
   }catch(err){
@@ -1241,8 +1245,16 @@ async function loadReport(){
     if(!r.ok) throw new Error("HTTP "+r.status);
     const d = await r.json();
     if(!d || d.ok === false){
-      // رمز غير صالح أو منتهٍ: امسح الجلسة وأعد الدخول بدل عرض خطأ مسدود
       store.clear();
+      if(P.source === "store"){
+        /* الزائر كتب عنوان الموقع فقط ولم يطلب الدخول — جلسة قديمة فاسدة
+           لا يجب أن تحوّل الصفحة الرئيسية إلى حائط تسجيل دخول. */
+        P.token = null; P.source = null;
+        document.body.className = "";
+        document.title = "وظيفتي";
+        return;
+      }
+      // جاء من رابط إيميل، فهو عميل فعلًا: اعرض الدخول مع السبب
       authEmailScreen((d && d.error) || "انتهت الجلسة. سجّل دخولك من جديد.");
       return;
     }
@@ -1285,6 +1297,7 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
 (function start(){
   if(QS_TOKEN){
     P.token = QS_TOKEN;
+    P.source = "link";
     store.set({ token: QS_TOKEN, email: "" });
     openPortal();
     return;
@@ -1292,6 +1305,7 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
   const s = store.get();
   if(s && s.token){
     P.token = s.token;
+    P.source = "store";
     A.email = s.email || "";
     openPortal();
     return;
