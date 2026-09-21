@@ -166,6 +166,39 @@ input:focus{border-color:var(--dawn);outline:none;box-shadow:0 0 0 3px rgba(242,
 .incl li{padding:6px 0;display:flex;gap:9px;color:var(--slate);line-height:1.6}
 .tick{color:var(--match);font-weight:700;flex:0 0 auto}
 
+/* ---------- plans ---------- */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:840px;margin:0 auto}
+.plan{border:1px solid var(--line);border-radius:18px;padding:28px 26px;background:var(--paper);
+  display:flex;flex-direction:column;transition:.16s;position:relative}
+.plan.pick{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.plan.soon{background:var(--wash)}
+.plan-top{display:flex;align-items:center;gap:9px;margin-bottom:5px;flex-wrap:wrap}
+.plan h3{margin:0;font-size:19px;font-weight:700}
+.soon-pill{background:rgba(242,169,60,.18);color:var(--dawn2);font-size:11.5px;font-weight:600;
+  padding:3px 10px;border-radius:99px}
+.plan .tag-line{color:var(--slate);font-size:14.5px;margin:0 0 16px;line-height:1.6}
+.plan .pn{margin-bottom:16px}
+.plan .incl{flex:1;font-size:14.5px}
+.plan .incl li{padding:5px 0}
+.plan .incl li.dim{color:var(--mute)}
+.plan .cta{margin-top:20px;width:100%;border:0;cursor:pointer;font:inherit;font-size:15px;
+  font-weight:600;padding:13px 20px;border-radius:99px;transition:.15s}
+.cta.solid{background:var(--dawn);color:#20160a}
+.cta.solid:hover{filter:brightness(1.05)}
+.cta.wire{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.cta.wire:hover{border-color:var(--ink)}
+.plan-note{font-size:12.5px;color:var(--mute);text-align:center;margin:9px 0 0;line-height:1.6}
+/* `display` on a class beats the `hidden` attribute's UA rule, so state it. */
+.chosen[hidden]{display:none}
+.chosen{display:inline-flex;align-items:center;gap:7px;background:var(--wash);
+  border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:13.5px;
+  color:var(--slate);margin-bottom:16px}
+.chosen b{color:var(--ink);font-weight:600}
+.chosen button{background:none;border:0;color:var(--slate);cursor:pointer;font:inherit;
+  font-size:13px;text-decoration:underline;padding:0}
+.chosen button:hover{color:var(--ink)}
+@media (max-width:760px){ .plans{grid-template-columns:1fr} }
+
 /* done */
 .done{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 26px;text-align:center}
 .done-i{width:58px;height:58px;border-radius:50%;background:rgba(28,155,106,.13);color:var(--match);
@@ -451,9 +484,55 @@ body.portal #portal{display:block}
   </div>
 </section>
 
+<section id="plans-sec">
+  <div class="wrap">
+    <div class="head">
+      <h2>باقتان</h2>
+      <p>نفس المحرك في الاثنتين — الفرق في من يضغط زر التقديم.</p>
+    </div>
+    <div class="plans">
+
+      <div class="plan" id="plan-basic">
+        <div class="plan-top"><h3>الأساسية</h3></div>
+        <p class="tag-line">نبحث ونقيّم ونجهّز، وأنت تقدّم.</p>
+        <div class="pn"><b>٤٩</b><span>ريال / شهريًا</span></div>
+        <ul class="incl">
+          <li><span class="tick">✓</span> بحث وتقييم على الوتيرة اللي تختارها</li>
+          <li><span class="tick">✓</span> الجديد فقط — ما يعيد وظيفة أرسلها لك</li>
+          <li><span class="tick">✓</span> درجة تطابق وسبب واضح لكل وظيفة</li>
+          <li><span class="tick">✓</span> ملخص وخطاب تقديم جاهزان لكل وظيفة</li>
+          <li><span class="tick">✓</span> صفحتك الخاصة: المطابقة والمستبعدة وأسبابها</li>
+          <li><span class="tick">✓</span> إلغاء في أي وقت</li>
+        </ul>
+        <button class="cta solid" type="button" data-plan="basic">ابدأ بالأساسية</button>
+      </div>
+
+      <div class="plan soon" id="plan-pro">
+        <div class="plan-top"><h3>المتقدمة</h3><span class="soon-pill">قريبًا</span></div>
+        <p class="tag-line">كل ما في الأساسية، وإحنا نرسل الطلب عنك.</p>
+        <div class="pn"><b>٩٩</b><span>ريال / شهريًا</span></div>
+        <ul class="incl">
+          <li><span class="tick">✓</span> كل ما في الباقة الأساسية</li>
+          <li><span class="tick">✓</span> <b>تقديم بنقرة</b> — نرسل سيرتك وخطابك من بريدك أنت</li>
+          <li><span class="tick">✓</span> متابعة كل طلب قُدّم باسمك وتاريخه وحالته</li>
+          <li><span class="tick">✓</span> أولوية في الدعم</li>
+          <li class="dim">لا نرسل شيئًا إلا بموافقتك على كل وظيفة</li>
+        </ul>
+        <button class="cta wire" type="button" data-plan="pro">سجّلني في قائمة الانتظار</button>
+        <p class="plan-note">قيد التطوير — نراسلك عند الإطلاق، ولا نحصّل شيئًا قبله.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="signup" id="start">
   <div class="wrap grid">
     <form id="f" novalidate>
+      <div class="chosen" id="chosen" hidden>
+        <span>الباقة: <b id="chosen-name">الأساسية</b></span>
+        <button type="button" id="chosen-change">تغيير</button>
+      </div>
       <div class="field">
         <label for="name">الاسم</label>
         <input type="text" id="name" autocomplete="name" placeholder="اسمك الكامل">
@@ -575,6 +654,39 @@ const FREQS = [
 
 const ar = n => String(n).replace(/[0-9]/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
 const $ = id => document.getElementById(id);
+
+/* ── اختيار الباقة ──
+   الاختيار هنا رغبة يسجّلها العميل فقط. الحساب يُنشأ على الأساسية دائمًا،
+   والترقية تتم يدويًا بعد الدفع — فلا يمنح النموذج باقة مدفوعة مجانًا. */
+let PLAN = "basic";
+const PLAN_AR = { basic:"الأساسية", pro:"المتقدمة" };
+const submitLabel = () => PLAN === "pro"
+  ? "سجّلني — أبدأ بالأساسية وأنتظر المتقدمة"
+  : "ابدأ الاشتراك — ٤٩ ريال شهريًا";
+
+function setPlan(p){
+  PLAN = (p === "pro") ? "pro" : "basic";
+  document.querySelectorAll(".plan").forEach(el =>
+    el.classList.toggle("pick", el.id === "plan-" + PLAN));
+  const ch = $("chosen");
+  if(ch){
+    ch.hidden = false;
+    $("chosen-name").textContent = PLAN_AR[PLAN];
+  }
+  const go = $("go");
+  if(go) go.textContent = submitLabel();
+}
+
+document.querySelectorAll("[data-plan]").forEach(b =>
+  b.addEventListener("click", () => {
+    setPlan(b.dataset.plan);
+    document.getElementById("start").scrollIntoView({behavior:"smooth",block:"start"});
+    setTimeout(()=>{ const n=$("name"); if(n) n.focus({preventScroll:true}); }, 420);
+  }));
+
+const chChange = $("chosen-change");
+if(chChange) chChange.addEventListener("click", () =>
+  document.getElementById("plans-sec").scrollIntoView({behavior:"smooth",block:"start"}));
 
 /* التصريف العربي: المفرد والمثنى والجمع */
 const everyLabel = d => d===1 ? "كل يوم" : d===2 ? "كل يومين"
@@ -720,6 +832,7 @@ $("f").addEventListener("submit",async e=>{
     name:$("name").value.trim(), email, phone:$("phone").value.trim(),
     regions:[...picked], titles:titles.join(", "),
     frequency_days:freq,
+    plan_requested:PLAN,   // رغبة العميل فقط — الحساب يُنشأ دائمًا على الأساسية
     cv_filename:file.name, cv_base64:await toB64(file),
     submitted_at:new Date().toISOString()
   };
@@ -741,7 +854,7 @@ $("f").addEventListener("submit",async e=>{
       <p>سجّلنا اشتراكك على <b>${esc(email)}</b>. أول تقرير يوصلك ${first} — وبعدها ${everyLabel(freq)}.</p></div>`;
     window.scrollTo({top:document.querySelector(".done").getBoundingClientRect().top+window.scrollY-120,behavior:"smooth"});
   }catch(err){
-    btn.disabled=false; btn.textContent="ابدأ الاشتراك — ٤٩ ريال شهريًا";
+    btn.disabled=false; btn.textContent=submitLabel();
     console.error("فشل الإرسال:",err);
     alert("تعذّر الإرسال. تحقق من اتصالك وحاول مرة أخرى.");
   }
