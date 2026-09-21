@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وظيفتي</title>
+<meta name="description" content="وكيل ذكي يبحث عن الوظائف المناسبة لك ويرسلها على الوتيرة التي تختارها.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0f1830; --night2:#1a2646; --twilight:#2b3a63;
+  --dawn:#f2a93c; --dawn2:#e8912a;
+  --ink:#131c30; --slate:#5d6b88; --mute:#8b97ae;
+  --line:#e2e7f0; --paper:#fff; --wash:#f5f7fb;
+  --match:#1c9b6a; --warn:#c4442f;
+  --r:14px; --maxw:1180px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141d33; --wash:#101830; --line:#293857;
+    --ink:#eaeefa; --slate:#9aa7c2; --mute:#7b88a3;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141d33; --wash:#101830; --line:#293857;
+  --ink:#eaeefa; --slate:#9aa7c2; --mute:#7b88a3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans Arabic",system-ui,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+h1,h2,h3{letter-spacing:-.02em; line-height:1.25; margin:0}
+button{font:inherit}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
+.mark{width:32px;height:32px;border-radius:10px;background:var(--night);position:relative;overflow:hidden;flex:0 0 auto}
+.mark i{position:absolute;inset:auto 0 -10px;height:22px;background:radial-gradient(circle at 50% 100%,var(--dawn),transparent 70%)}
+.nav-cta{background:var(--ink);color:var(--paper);border:0;cursor:pointer;padding:9px 20px;
+  border-radius:99px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s}
+.nav-cta:hover{transform:translateY(-1px)}
+
+/* ---------- hero ---------- */
+.hero{background:radial-gradient(760px 300px at 85% 0%,rgba(242,169,60,.24),transparent 60%),
+  linear-gradient(170deg,var(--night),var(--night2) 60%,var(--twilight));
+  color:#e9eefc;padding:78px 0 92px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:96px;
+  background:linear-gradient(to top,var(--paper),transparent)}
+.hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:54px;align-items:center;position:relative;z-index:2}
+.tag{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--dawn);
+  border:1px solid rgba(242,169,60,.32);background:rgba(242,169,60,.09);padding:6px 15px;border-radius:99px;margin-bottom:22px}
+.tag b{width:6px;height:6px;border-radius:50%;background:var(--dawn);display:block}
+.hero h1{font-size:clamp(33px,4.4vw,53px);font-weight:700;color:#fff;max-width:16ch;margin-bottom:20px}
+.lede{font-size:19px;color:#b6c2dd;max-width:44ch;margin:0 0 30px;line-height:1.8}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--dawn);color:#20160a;border:0;cursor:pointer;padding:14px 30px;border-radius:99px;
+  font-weight:700;font-size:17px;text-decoration:none;display:inline-block;
+  box-shadow:0 6px 24px rgba(242,169,60,.3);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 11px 30px rgba(242,169,60,.4)}
+.hero-note{font-size:15px;color:#8f9dbd}
+.hero-note b{color:#e9eefc;font-weight:600}
+
+/* ---------- report card ---------- */
+.mail{background:var(--paper);color:var(--ink);border-radius:17px;overflow:hidden;
+  box-shadow:0 28px 64px rgba(6,11,26,.46)}
+.mail-top{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--wash);border-bottom:1px solid var(--line)}
+.tl{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.mail-from{font-size:12.5px;color:var(--mute);margin-inline-start:6px}
+.mail-body{padding:19px}
+.mail-subj{font-weight:700;font-size:16px;margin-bottom:3px}
+.mail-meta{font-size:13px;color:var(--mute);margin-bottom:15px}
+.row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.score{flex:0 0 auto;width:43px;height:43px;border-radius:12px;display:grid;place-items:center;
+  font-weight:700;font-size:15px;background:var(--wash);color:var(--slate)}
+.score.hi{background:rgba(28,155,106,.13);color:var(--match)}
+.rt{font-weight:600;font-size:15px;line-height:1.4}
+.rc{font-size:13px;color:var(--mute)}
+.mail-foot{font-size:12.5px;color:var(--mute);padding-top:12px;border-top:1px solid var(--line)}
+
+/* ---------- sections ---------- */
+section{padding:86px 0}
+.head{max-width:54ch;margin-bottom:42px}
+h2{font-size:clamp(26px,3vw,37px);font-weight:700;margin-bottom:13px}
+.head p{color:var(--slate);margin:0;font-size:17.5px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.step{padding:25px 22px 4px 0;border-inline-end:1px solid var(--line)}
+.step:last-child{border-inline-end:0}
+.sn{font-size:13px;font-weight:600;color:var(--dawn2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sn:after{content:"";height:1px;flex:1;background:var(--line)}
+.step h3{font-size:17px;font-weight:600;margin-bottom:6px}
+.step p{margin:0;font-size:15px;color:var(--slate);line-height:1.7}
+
+/* ---------- signup ---------- */
+.signup{background:var(--wash);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1.06fr .94fr;gap:44px;align-items:start}
+form{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px}
+.field{margin-bottom:22px}
+label{display:block;font-weight:600;font-size:15px;margin-bottom:7px}
+.sub{font-weight:400;color:var(--mute);font-size:13.5px}
+input[type=text],input[type=email],input[type=tel],input[type=number]{
+  width:100%;padding:12px 15px;border:1px solid var(--line);border-radius:11px;
+  font:inherit;font-size:16px;background:var(--paper);color:var(--ink);transition:border-color .15s}
+input:focus{border-color:var(--dawn);outline:none;box-shadow:0 0 0 3px rgba(242,169,60,.16)}
+:focus-visible{outline:2px solid var(--dawn);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 15px;border:1px solid var(--line);border-radius:99px;cursor:pointer;font-size:15px;
+  background:var(--paper);color:var(--ink);transition:all .14s}
+.chip:hover{border-color:var(--mute)}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.add{border-style:dashed;color:var(--slate)}
+
+/* frequency */
+.freqs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.freq{padding:13px 8px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;text-align:center;
+  background:var(--paper);transition:all .15s}
+.freq:hover{border-color:var(--mute)}
+.freq[aria-pressed=true]{border-color:var(--dawn);background:rgba(242,169,60,.09)}
+.freq b{display:block;font-size:15px;font-weight:600}
+.freq span{font-size:12.5px;color:var(--mute)}
+.custom-wrap{display:none;margin-bottom:14px;align-items:center;gap:10px}
+.custom-wrap.on{display:flex}
+.custom-wrap input{width:90px}
+.cal{background:var(--wash);border:1px solid var(--line);border-radius:12px;padding:14px}
+.cal-h{font-size:13.5px;color:var(--slate);margin-bottom:11px}
+.cal-h b{color:var(--ink);font-weight:600}
+.days{display:grid;grid-template-columns:repeat(14,1fr);gap:5px}
+.day{aspect-ratio:1;border-radius:7px;background:var(--line);display:grid;place-items:center;
+  font-size:11px;color:var(--mute);transition:background .2s ease,color .2s ease,transform .2s ease}
+.day.on{background:var(--dawn);color:#20160a;font-weight:700;transform:scale(1.07)}
+
+/* upload */
+.drop{border:1.5px dashed var(--line);border-radius:13px;padding:24px 18px;text-align:center;cursor:pointer;
+  background:var(--paper);transition:all .16s}
+.drop:hover,.drop.over{border-color:var(--dawn);background:rgba(242,169,60,.07)}
+.drop.has{border-style:solid;border-color:var(--match);background:rgba(28,155,106,.07)}
+.dt{font-weight:600;font-size:15px;margin-bottom:3px}
+.ds{font-size:13.5px;color:var(--mute)}
+.err{color:var(--warn);font-size:14px;margin-top:6px;display:none}
+.err.on{display:block}
+.submit{width:100%;background:var(--ink);color:var(--paper);border:0;cursor:pointer;padding:16px;
+  border-radius:12px;font-weight:700;font-size:17px;transition:opacity .15s}
+.submit:hover{opacity:.9}
+.submit:disabled{opacity:.5;cursor:not-allowed}
+.fine{font-size:13.5px;color:var(--mute);text-align:center;margin:14px 0 0;line-height:1.65}
+
+/* side panel */
+.side{position:sticky;top:88px}
+.live{font-size:13.5px;color:var(--slate);margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--match);flex:0 0 auto}
+.price{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:18px}
+.pn{display:flex;align-items:baseline;gap:8px;margin-bottom:12px}
+.pn b{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.pn span{color:var(--mute);font-size:15px}
+.incl{list-style:none;padding:0;margin:0;font-size:15px}
+.incl li{padding:6px 0;display:flex;gap:9px;color:var(--slate);line-height:1.6}
+.tick{color:var(--match);font-weight:700;flex:0 0 auto}
+
+/* done */
+.done{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:40px 26px;text-align:center}
+.done-i{width:58px;height:58px;border-radius:50%;background:rgba(28,155,106,.13);color:var(--match);
+  display:grid;place-items:center;margin:0 auto 17px;font-size:27px}
+.done h3{font-size:22px;margin-bottom:9px}
+.done p{color:var(--slate);margin:0 auto;max-width:38ch}
+
+footer{background:var(--night);color:#8b9abb;padding:32px 0;font-size:14.5px}
+.foot{max-width:var(--maxw);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.rise{animation:rise .6s cubic-bezier(.2,.7,.3,1) both}
+.rise:nth-child(2){animation-delay:.08s}
+
+@media (max-width:920px){
+  .hero-in,.grid{grid-template-columns:1fr;gap:38px}
+  .side{position:static}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{border-inline-end:0;border-bottom:1px solid var(--line);padding-inline-end:0;padding-bottom:18px}
+  .step:nth-child(odd){border-inline-end:1px solid var(--line);padding-inline-end:22px}
+  section{padding:60px 0}
+  .hero{padding:54px 0 70px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .steps{grid-template-columns:1fr}
+  .step:nth-child(odd){border-inline-end:0;padding-inline-end:0}
+  form{padding:22px}
+  .freqs{grid-template-columns:1fr 1fr}
+  .days{grid-template-columns:repeat(7,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- client report portal ---------- */
+#portal{display:none}
+body.portal #site{display:none}
+body.portal #portal{display:block}
+body.auth #site,body.auth #portal{display:none}
+body.auth #auth{display:block!important}
+body.portal #portal{display:block}
+
+.p-nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.p-nav-in{max-width:var(--maxw);margin:0 auto;padding:13px 24px;display:flex;align-items:center;
+  justify-content:space-between;gap:14px;flex-wrap:wrap}
+.p-who{font-size:13.5px;color:var(--mute)}
+.p-who b{color:var(--ink);font-weight:600}
+.ghost{background:transparent;color:var(--slate);border:1px solid var(--line);cursor:pointer;
+  padding:8px 16px;border-radius:99px;font:inherit;font-size:13.5px;transition:.15s}
+.ghost:hover{border-color:var(--slate);color:var(--ink)}
+
+.p-head{background:linear-gradient(170deg,var(--night),var(--night2) 70%,var(--twilight));
+  color:#fff;padding:38px 0 34px}
+.p-head h1{font-size:clamp(25px,4vw,34px);font-weight:700;margin:0 0 6px;letter-spacing:-.02em}
+.p-head p{margin:0;color:#b9c4dd;font-size:15.5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r);padding:15px 17px}
+.stat .v{font-size:26px;font-weight:700;line-height:1.15}
+.stat .k{font-size:12.5px;color:#a8b4d0;margin-top:3px}
+
+.p-body{max-width:var(--maxw);margin:0 auto;padding:26px 24px 70px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.tools input{flex:1;min-width:190px;padding:11px 15px;border:1px solid var(--line);border-radius:10px;
+  font:inherit;font-size:15px;background:var(--paper);color:var(--ink)}
+.tools input:focus{outline:2px solid var(--dawn);outline-offset:1px;border-color:transparent}
+.sorts{display:flex;gap:6px}
+.sort{background:var(--wash);border:1px solid var(--line);color:var(--slate);cursor:pointer;
+  padding:10px 15px;border-radius:9px;font:inherit;font-size:14px;transition:.15s;white-space:nowrap}
+.sort[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+.daygroup{margin-bottom:30px}
+.daylabel{display:flex;align-items:center;gap:11px;margin:0 0 14px;font-size:14px;color:var(--mute)}
+.daylabel::after{content:"";flex:1;height:1px;background:var(--line)}
+.daylabel b{color:var(--ink);font-weight:600;font-size:15.5px}
+.new-pill{background:rgba(242,169,60,.16);color:var(--dawn2);font-size:12px;font-weight:600;
+  padding:3px 10px;border-radius:99px}
+
+.job{border:1px solid var(--line);border-radius:var(--r);padding:19px 21px;margin-bottom:12px;
+  background:var(--paper);transition:.16s}
+.job:hover{border-color:var(--slate)}
+.job-top{display:flex;gap:15px;align-items:flex-start}
+.ring{width:54px;height:54px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;
+  font-weight:700;font-size:15px;position:relative;background:var(--wash);color:var(--slate)}
+.ring::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(var(--match) calc(var(--p)*1%),transparent 0)}
+.ring::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--paper)}
+.ring span{position:relative;z-index:1;color:var(--match)}
+.ring.mid span{color:var(--dawn2)} .ring.mid::before{background:conic-gradient(var(--dawn) calc(var(--p)*1%),transparent 0)}
+.job h3{margin:0 0 4px;font-size:17.5px;font-weight:600;line-height:1.35}
+.job-sub{font-size:14px;color:var(--slate);margin-bottom:9px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.badge{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--wash);color:var(--slate)}
+.badge.rem{background:rgba(28,155,106,.12);color:var(--match)}
+.badge.sal{background:rgba(242,169,60,.15);color:var(--dawn2)}
+.why{font-size:14.5px;color:var(--slate);line-height:1.6;margin:0 0 10px}
+.kws{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.kw{font-size:12.5px;padding:4px 11px;border-radius:7px;background:var(--wash);color:var(--ink);
+  border:1px solid var(--line)}
+.flags{font-size:13.5px;color:var(--warn);margin:0 0 10px}
+.job-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.open{background:var(--ink);color:var(--paper);text-decoration:none;padding:9px 18px;border-radius:9px;
+  font-size:14px;font-weight:500;transition:.15s}
+.open:hover{opacity:.87}
+.more{background:transparent;border:1px solid var(--line);color:var(--slate);cursor:pointer;
+  padding:9px 16px;border-radius:9px;font:inherit;font-size:14px;transition:.15s}
+.more:hover{border-color:var(--slate);color:var(--ink)}
+.detail{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.detail.on{display:block}
+.dsec{margin-bottom:16px}
+.dsec:last-child{margin-bottom:0}
+.dsec h4{margin:0 0 7px;font-size:13px;font-weight:600;color:var(--mute);
+  display:flex;align-items:center;gap:9px}
+.copy{background:var(--wash);border:1px solid var(--line);color:var(--slate);cursor:pointer;
+  padding:3px 11px;border-radius:7px;font:inherit;font-size:12px;transition:.15s}
+.copy:hover{color:var(--ink);border-color:var(--slate)}
+.copy.done{background:rgba(28,155,106,.13);color:var(--match);border-color:transparent}
+.dsec pre{margin:0;white-space:pre-wrap;font:inherit;font-size:14.5px;line-height:1.72;
+  color:var(--ink);background:var(--wash);padding:14px 16px;border-radius:10px}
+
+/* ---------- login ---------- */
+.auth-wrap{min-height:100vh;display:grid;place-items:center;padding:30px 20px;
+  background:linear-gradient(170deg,var(--night),var(--night2) 70%,var(--twilight))}
+.acard{background:var(--paper);border-radius:18px;padding:34px 32px;width:100%;max-width:410px;
+  box-shadow:0 24px 60px rgba(8,14,30,.4)}
+.acard .mark{width:38px;height:38px;border-radius:11px;margin-bottom:18px}
+.acard h2{margin:0 0 7px;font-size:22px;font-weight:700;letter-spacing:-.02em}
+.acard p.sub{margin:0 0 22px;color:var(--slate);font-size:14.5px;line-height:1.65}
+.acard label{display:block;font-size:13.5px;font-weight:500;color:var(--slate);margin-bottom:7px}
+.acard input{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:10px;
+  font:inherit;font-size:15.5px;background:var(--paper);color:var(--ink);box-sizing:border-box}
+.acard input:focus{outline:2px solid var(--dawn);outline-offset:1px;border-color:transparent}
+.acard input.code{text-align:center;letter-spacing:11px;font-size:26px;font-weight:700;
+  direction:ltr;padding:15px 10px}
+.acard .btn{width:100%;margin-top:16px;justify-content:center;display:block;text-align:center}
+.acard .link{background:none;border:0;color:var(--slate);cursor:pointer;font:inherit;
+  font-size:13.5px;padding:9px 0 0;text-decoration:underline;width:100%}
+.acard .link:hover{color:var(--ink)}
+.acard .msg{margin:14px 0 0;padding:11px 14px;border-radius:9px;font-size:13.5px;line-height:1.6}
+.acard .msg.err{background:rgba(196,68,47,.1);color:var(--warn)}
+.acard .msg.ok{background:rgba(28,155,106,.11);color:var(--match)}
+.acard .to{font-size:13px;color:var(--mute);margin:0 0 20px;word-break:break-all}
+.acard .to b{color:var(--ink);font-weight:600}
+
+/* ---------- report tabs ---------- */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:20px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{background:none;border:0;border-bottom:2px solid transparent;color:var(--slate);
+  cursor:pointer;padding:12px 16px;font:inherit;font-size:14.5px;white-space:nowrap;
+  transition:.15s;margin-bottom:-1px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--dawn);font-weight:600}
+.tab .n{display:inline-block;background:var(--wash);border-radius:99px;padding:1px 8px;
+  font-size:12px;margin-inline-start:6px;color:var(--mute)}
+.tab[aria-selected="true"] .n{background:rgba(242,169,60,.18);color:var(--dawn2)}
+.plan-pill{background:rgba(242,169,60,.16);color:var(--dawn2);font-size:11.5px;font-weight:600;
+  padding:3px 10px;border-radius:99px;margin-inline-start:8px}
+
+.job.rej{opacity:.86}
+.job.rej .ring::before{background:conic-gradient(var(--mute) calc(var(--p)*1%),transparent 0)}
+.job.rej .ring span{color:var(--mute)}
+.why.rej-why{color:var(--warn)}
+.appl{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 18px;margin-bottom:10px;background:var(--paper)}
+.appl-main{flex:1;min-width:0}
+.appl h3{margin:0 0 3px;font-size:16px;font-weight:600}
+.appl .meta{font-size:13px;color:var(--mute)}
+.st{font-size:12px;padding:4px 11px;border-radius:99px;white-space:nowrap;
+  background:var(--wash);color:var(--slate)}
+.st.sent{background:rgba(28,155,106,.12);color:var(--match)}
+.st.wait{background:rgba(242,169,60,.15);color:var(--dawn2)}
+.upsell{border:1px dashed var(--line);border-radius:var(--r);padding:32px 26px;text-align:center}
+.upsell h3{margin:0 0 9px;font-size:19px;font-weight:700}
+.upsell p{margin:0 auto 18px;max-width:420px;color:var(--slate);font-size:15px;line-height:1.7}
+
+.p-state{text-align:center;padding:72px 24px;color:var(--slate)}
+.p-state .ic{font-size:40px;margin-bottom:14px}
+.p-state h2{margin:0 0 8px;font-size:21px;color:var(--ink);font-weight:600}
+.p-state p{margin:0 auto;max-width:430px;font-size:15.5px;line-height:1.65}
+.skel{height:104px;border-radius:var(--r);background:linear-gradient(90deg,var(--wash),var(--line),var(--wash));
+  background-size:200% 100%;animation:sh 1.3s linear infinite;margin-bottom:12px}
+@keyframes sh{to{background-position:-200% 0}}
+.p-note{font-size:13px;color:var(--mute);text-align:center;margin-top:26px;line-height:1.7}
+
+@media (max-width:640px){
+  .stats{grid-template-columns:1fr;gap:9px}
+  .stat{display:flex;align-items:baseline;gap:10px}
+  .stat .v{font-size:21px} .stat .k{margin:0}
+  .job-top{gap:12px}
+  .ring{width:46px;height:46px;font-size:13.5px}
+  .p-body{padding:22px 16px 56px}
+  .p-nav-in{padding:11px 16px}
+  .tools input{min-width:0;width:100%;flex:1 0 100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ تسجيل الدخول — بالبريد ورمز تحقق ══════ -->
+<div id="auth" style="display:none">
+  <div class="auth-wrap">
+    <div class="acard" id="auth-card"></div>
+  </div>
+</div>
+
+<!-- ══════ بوابة تقرير العميل ══════ -->
+<div id="portal">
+  <nav class="p-nav">
+    <div class="p-nav-in">
+      <div class="brand"><span class="mark"><i></i></span>وظيفتي</div>
+      <div class="p-who" id="p-who"></div>
+      <div style="display:flex;gap:7px">
+        <button class="ghost" id="p-refresh" type="button">تحديث</button>
+        <button class="ghost" id="p-out" type="button">خروج</button>
+      </div>
+    </div>
+  </nav>
+  <div id="p-main">
+    <div class="p-body">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div>
+  </div>
+</div>
+
+<div id="site">
+
+<nav>
+  <div class="nav-in">
+    <div class="brand"><span class="mark"><i></i></span>وظيفتي</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="ghost" id="nav-login" type="button">دخول</button>
+      <a href="#start" class="nav-cta">ابدأ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="rise">
+      <div class="tag"><b></b>يشتغل وأنت نايم</div>
+      <h1>وظائف تناسبك فعلًا، مفروزة قبل ما تفتح جوالك</h1>
+      <p class="lede">وكيل ذكي يقرأ سيرتك الذاتية، يبحث في لينكدإن وبيت وإنديد وغيرها، ويرسل لك الجديد فقط — مع درجة تطابق وسبب واضح لكل وظيفة.</p>
+      <div class="hero-btns">
+        <a href="#start" class="btn">جرّبه الآن</a>
+        <span class="hero-note"><b>٤٩ ريال</b> شهريًا · ألغِ متى شئت</span>
+      </div>
+    </div>
+
+    <div class="mail rise">
+      <div class="mail-top"><span class="tl"></span><span class="tl"></span><span class="tl"></span>
+        <span class="mail-from">من: وكيل وظيفتي</span></div>
+      <div class="mail-body">
+        <p class="mail-subj">وظيفتي: ٣ وظائف جديدة تناسبك</p>
+        <p class="mail-meta">راجعنا ٣٨ وظيفة · عرضنا الجديد فقط</p>
+        <div class="row"><div class="score hi">٩١</div>
+          <div><div class="rt">مهندس ذكاء اصطناعي</div><div class="rc">الرياض · تطابق قوي مع بحثك في التعلم الآلي</div></div></div>
+        <div class="row"><div class="score hi">٨٤</div>
+          <div><div class="rt">محلل بيانات</div><div class="rc">الخبر · يقبل ٠–٣ سنوات خبرة</div></div></div>
+        <div class="row"><div class="score">٧٦</div>
+          <div><div class="rt">مطوّر Python</div><div class="rc">عن بُعد · شهادة AWS مطلوبة ✓</div></div></div>
+        <p class="mail-foot">٣٥ وظيفة استُبعدت — الأسباب في جدول المتابعة</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <h2>كيف يشتغل</h2>
+      <p>ترفع سيرتك مرة واحدة، وتختار كل كم يوم تبغى الرسالة. الباقي يتكرر بدون أي جهد منك.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="sn">الخطوة الأولى</div><h3>يقرأ سيرتك</h3>
+        <p>يستخرج مهاراتك وخبرتك وشهاداتك ويبني منها معيار البحث الخاص بك.</p></div>
+      <div class="step"><div class="sn">الخطوة الثانية</div><h3>يبحث نيابة عنك</h3>
+        <p>يمسح المواقع الكبرى بعدة مسميات وظيفية في المناطق اللي تختارها.</p></div>
+      <div class="step"><div class="sn">الخطوة الثالثة</div><h3>يقيّم ويستبعد</h3>
+        <p>درجة من ١٠٠ لكل وظيفة حسب المهارات والخبرة والتعليم والموقع — والضعيف يُستبعد بسبب مكتوب.</p></div>
+      <div class="step"><div class="sn">الخطوة الرابعة</div><h3>يرسل الجديد فقط</h3>
+        <p>يتذكر كل وظيفة أرسلها لك، فما يعيدها مرة ثانية. لو ما فيه جديد، ما يزعجك برسالة فاضية.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="signup" id="start">
+  <div class="wrap grid">
+    <form id="f" novalidate>
+      <div class="field">
+        <label for="name">الاسم</label>
+        <input type="text" id="name" autocomplete="name" placeholder="اسمك الكامل">
+      </div>
+
+      <div class="field">
+        <label for="email">البريد الإلكتروني <span class="sub">— هنا يوصلك التقرير</span></label>
+        <input type="email" id="email" autocomplete="email" placeholder="name@example.com" required>
+        <div class="err" id="e-email">اكتب بريدًا إلكترونيًا صحيحًا.</div>
+      </div>
+
+      <div class="field">
+        <label for="phone">رقم الجوال <span class="sub">— اختياري</span></label>
+        <input type="tel" id="phone" autocomplete="tel" placeholder="05xxxxxxxx" dir="ltr" style="text-align:right">
+      </div>
+
+      <div class="field">
+        <label>المناطق التي ترغب في العمل بها</label>
+        <div class="chips" id="regions" role="group" aria-label="المناطق"></div>
+        <div class="err" id="e-reg">اختر منطقة واحدة على الأقل.</div>
+      </div>
+
+      <div class="field">
+        <label for="titles">المسميات الوظيفية <span class="sub">— افصل بفاصلة، أو اختر من الأسفل</span></label>
+        <input type="text" id="titles" placeholder="مثال: مهندس ذكاء اصطناعي، محلل بيانات">
+        <div class="chips" id="sugg" style="margin-top:9px"></div>
+        <div class="err" id="e-title">اكتب مسمى وظيفي واحد على الأقل.</div>
+      </div>
+
+      <div class="field">
+        <label>كل كم يوم تبغى الرسالة؟</label>
+        <div class="freqs" id="freqs" role="group" aria-label="وتيرة الإرسال"></div>
+        <div class="custom-wrap" id="cw">
+          <label for="cdays" style="margin:0;font-weight:500">كل</label>
+          <input type="number" id="cdays" min="1" max="30" value="5">
+          <span class="sub">يوم (من ١ إلى ٣٠)</span>
+        </div>
+        <div class="cal">
+          <div class="cal-h" id="calh"></div>
+          <div class="days" id="days"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="cv">السيرة الذاتية <span class="sub">— ملف PDF، بحد أقصى ٥ ميجابايت</span></label>
+        <div class="drop" id="drop" tabindex="0" role="button" aria-describedby="cvs">
+          <div class="dt" id="cvs">اسحب الملف هنا أو اضغط للاختيار</div>
+          <div class="ds">PDF فقط — لو عندك Word، احفظه PDF أولًا</div>
+        </div>
+        <input type="file" id="cv" accept="application/pdf,.pdf" hidden>
+        <div class="err" id="e-cv">أرفق سيرتك الذاتية بصيغة PDF.</div>
+      </div>
+
+      <button type="submit" class="submit" id="go">ابدأ الاشتراك — ٤٩ ريال شهريًا</button>
+      <p class="fine">لن نشارك بياناتك مع أي جهة. تُستخدم سيرتك لمطابقة الوظائف فقط،<br>ولا نقدّم على أي وظيفة نيابة عنك.</p>
+    </form>
+
+    <div class="side">
+      <p class="live"><span class="pulse"></span>معاينة مباشرة — تتغير وأنت تكتب</p>
+      <div class="mail">
+        <div class="mail-top"><span class="tl"></span><span class="tl"></span><span class="tl"></span>
+          <span class="mail-from" id="pv-to">إلى: بريدك</span></div>
+        <div class="mail-body">
+          <p class="mail-subj" id="pv-subj">وظيفتي: ٣ وظائف جديدة تناسبك</p>
+          <p class="mail-meta" id="pv-meta">تصلك كل يوم · الجديد فقط</p>
+          <div id="pv-rows"></div>
+          <p class="mail-foot" id="pv-foot">الوظائف المستبعدة وأسبابها في جدول المتابعة</p>
+        </div>
+      </div>
+
+      <div class="price">
+        <div class="pn"><b>٤٩</b><span>ريال / شهريًا</span></div>
+        <ul class="incl">
+          <li><span class="tick">✓</span> بحث وتقييم على الوتيرة اللي تختارها</li>
+          <li><span class="tick">✓</span> الجديد فقط — ما يعيد وظيفة أرسلها لك</li>
+          <li><span class="tick">✓</span> درجة تطابق وسبب واضح لكل وظيفة</li>
+          <li><span class="tick">✓</span> ملخص وكلمات مفتاحية جاهزة لكل تقديم</li>
+          <li><span class="tick">✓</span> جدول متابعة لكل الوظائف</li>
+          <li><span class="tick">✓</span> إلغاء في أي وقت</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot"><span>وظيفتي — وكيل البحث عن الوظائف</span><span>الدمام، المملكة العربية السعودية</span></div>
+</footer>
+
+</div><!-- /#site -->
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   ⬇⬇⬇  الصق هنا رابط Webhook الإنتاجي من n8n  ⬇⬇⬇
+   شكله:  https://اسم-حسابك.app.n8n.cloud/webhook/signup
+   مهم: الرابط الإنتاجي (webhook) لا التجريبي (webhook-test)،
+        والوورك فلو لازم يكون Active في n8n.
+   ══════════════════════════════════════════════════════════════════ */
+const WEBHOOK_URL = "https://tahatest1.app.n8n.cloud/webhook/signup";
+
+/* ⬇⬇⬇  وهنا رابط تقارير العملاء من نفس n8n  ⬇⬇⬇
+   شكله:  https://اسم-حسابك.app.n8n.cloud/webhook/report
+   نفس الرابط أعلاه بالضبط، فقط استبدل signup بـ report.            */
+const REPORT_URL  = "https://tahatest1.app.n8n.cloud/webhook/report";
+
+/* ⬇⬇⬇  ورابطا تسجيل الدخول — نفس العنوان بـ login و verify  ⬇⬇⬇  */
+const LOGIN_URL   = "https://tahatest1.app.n8n.cloud/webhook/login";
+const VERIFY_URL  = "https://tahatest1.app.n8n.cloud/webhook/verify";
+/* ══════════════════════════════════════════════════════════════════ */
+
+const REGIONS = ["الرياض","الدمام","الخبر","الظهران","الجبيل","جدة","مكة المكرمة","المدينة المنورة","أبها","عن بُعد"];
+const SUGG = ["مهندس ذكاء اصطناعي","محلل بيانات","مطوّر Python","مهندس برمجيات","مطوّر ويب","مهندس ميكانيكي","مهندس مشاريع","مهندس صيانة","محاسب","أخصائي تسويق"];
+const FREQS = [
+  {d:1,  t:"كل يوم",   s:"أسرع تنبيه"},
+  {d:2,  t:"كل يومين", s:"متوازن"},
+  {d:3,  t:"كل ٣ أيام",s:"هادئ"},
+  {d:7,  t:"أسبوعيًا", s:"ملخص واحد"},
+];
+
+const ar = n => String(n).replace(/[0-9]/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+const $ = id => document.getElementById(id);
+
+/* التصريف العربي: المفرد والمثنى والجمع */
+const everyLabel = d => d===1 ? "كل يوم" : d===2 ? "كل يومين"
+  : d<=10 ? `كل ${ar(d)} أيام` : `كل ${ar(d)} يومًا`;
+const msgCount = n => n===1 ? "رسالة واحدة" : n===2 ? "رسالتين"
+  : n<=10 ? `${ar(n)} رسائل` : `${ar(n)} رسالة`;
+const jobCount = n => n===1 ? "وظيفة جديدة واحدة" : n===2 ? "وظيفتين جديدتين"
+  : `${ar(n)} وظائف جديدة`;
+
+/* ---------- regions ---------- */
+const picked = new Set();
+REGIONS.forEach(r=>{
+  const b=document.createElement("button");
+  b.type="button"; b.className="chip"; b.textContent=r; b.setAttribute("aria-pressed","false");
+  b.onclick=()=>{
+    const on=b.getAttribute("aria-pressed")==="true";
+    b.setAttribute("aria-pressed",String(!on));
+    on?picked.delete(r):picked.add(r);
+    $("e-reg").classList.remove("on"); preview();
+  };
+  $("regions").appendChild(b);
+});
+
+/* ---------- title suggestions ---------- */
+SUGG.forEach(t=>{
+  const b=document.createElement("button");
+  b.type="button"; b.className="chip add"; b.textContent="+ "+t;
+  b.onclick=()=>{
+    const cur=$("titles").value.split(/[,،]/).map(s=>s.trim()).filter(Boolean);
+    if(!cur.includes(t)) cur.push(t);
+    $("titles").value=cur.join("، ");
+    $("e-title").classList.remove("on"); preview();
+  };
+  $("sugg").appendChild(b);
+});
+
+/* ---------- frequency ---------- */
+let freq = 1;
+FREQS.forEach(f=>{
+  const b=document.createElement("button");
+  b.type="button"; b.className="freq"; b.dataset.d=f.d;
+  b.setAttribute("aria-pressed",String(f.d===1));
+  b.innerHTML=`<b>${f.t}</b><span>${f.s}</span>`;
+  b.onclick=()=>setFreq(f.d,b);
+  $("freqs").appendChild(b);
+});
+const bCustom=document.createElement("button");
+bCustom.type="button"; bCustom.className="freq"; bCustom.dataset.d="custom";
+bCustom.setAttribute("aria-pressed","false");
+bCustom.innerHTML=`<b>مخصص</b><span>حدّد الأيام</span>`;
+bCustom.style.gridColumn="1 / -1"; // full row whatever the column count is
+bCustom.onclick=()=>{ $("cw").classList.add("on"); setFreq(clampDays(), bCustom); };
+$("freqs").appendChild(bCustom);
+
+const clampDays=()=>Math.min(30,Math.max(1,parseInt($("cdays").value,10)||1));
+$("cdays").oninput=()=>{ if(bCustom.getAttribute("aria-pressed")==="true") setFreq(clampDays(),bCustom); };
+
+function setFreq(d,btn){
+  freq=d;
+  [...$("freqs").children].forEach(c=>c.setAttribute("aria-pressed",String(c===btn)));
+  if(btn!==bCustom) $("cw").classList.remove("on");
+  calendar(); preview();
+}
+
+function calendar(){
+  const box=$("days"); box.innerHTML="";
+  const n = window.matchMedia("(max-width:560px)").matches ? 7 : 14;
+  for(let i=0;i<n;i++){
+    const c=document.createElement("div");
+    c.className="day"+(i%freq===0?" on":"");
+    c.textContent=ar(i+1);
+    box.appendChild(c);
+  }
+  const count=Math.ceil(n/freq);
+  $("calh").innerHTML = `تستلم <b>${everyLabel(freq)}</b> — ${msgCount(count)} خلال ${ar(n)} يومًا`;
+}
+window.addEventListener("resize",calendar);
+
+/* ---------- live preview ---------- */
+function preview(){
+  const mail=$("email").value.trim();
+  $("pv-to").textContent = mail ? "إلى: "+mail : "إلى: بريدك";
+
+  const titles=$("titles").value.split(/[,،]/).map(s=>s.trim()).filter(Boolean);
+  const regs=[...picked];
+  const t=titles.length?titles:["مهندس ذكاء اصطناعي","محلل بيانات","مطوّر Python"];
+  const r=regs.length?regs:["الرياض"];
+  const scores=[91,84,76];
+
+  $("pv-rows").innerHTML = t.slice(0,3).map((title,i)=>`
+    <div class="row">
+      <div class="score${scores[i]>=80?" hi":""}">${ar(scores[i])}</div>
+      <div><div class="rt">${esc(title)}</div><div class="rc">${esc(r[i%r.length])} · تطابق مع ملفك</div></div>
+    </div>`).join("");
+
+  $("pv-meta").textContent = `تصلك ${everyLabel(freq)} · الجديد فقط`;
+  $("pv-subj").textContent = `وظيفتي: ${jobCount(Math.min(3,t.length))} تناسبك`;
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+["email","titles"].forEach(id=>$(id).addEventListener("input",preview));
+
+/* ---------- upload ---------- */
+let file=null;
+const drop=$("drop"), cvIn=$("cv"), cvs=$("cvs");
+function setFile(f){
+  if(!f) return;
+  const isPdf = f.type==="application/pdf" || /\.pdf$/i.test(f.name);
+  if(!isPdf){ cvs.textContent="الملف لازم يكون PDF"; drop.classList.remove("has"); file=null; return; }
+  if(f.size>5*1024*1024){ cvs.textContent="الملف أكبر من ٥ ميجابايت"; drop.classList.remove("has"); file=null; return; }
+  file=f; drop.classList.add("has"); cvs.textContent=f.name;
+  $("e-cv").classList.remove("on");
+}
+drop.onclick=()=>cvIn.click();
+drop.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); cvIn.click(); } };
+cvIn.onchange=e=>setFile(e.target.files[0]);
+["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+drop.addEventListener("drop",e=>setFile(e.dataTransfer.files[0]));
+
+const toB64=f=>new Promise((res,rej)=>{
+  const r=new FileReader();
+  r.onload=()=>res(String(r.result).split(",")[1]);
+  r.onerror=rej; r.readAsDataURL(f);
+});
+
+/* ---------- submit ---------- */
+$("f").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const email=$("email").value.trim();
+  const titles=$("titles").value.split(/[,،]/).map(s=>s.trim()).filter(Boolean);
+  let bad=false;
+  const mark=(id,on)=>{ $(id).classList.toggle("on",on); if(on) bad=true; };
+
+  mark("e-email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+  mark("e-reg", picked.size===0);
+  mark("e-title", titles.length===0);
+  mark("e-cv", !file);
+  if(bad){ document.querySelector(".err.on").scrollIntoView({block:"center",behavior:"smooth"}); return; }
+
+  const btn=$("go"); btn.disabled=true; btn.textContent="جارٍ الإرسال…";
+
+  const payload={
+    name:$("name").value.trim(), email, phone:$("phone").value.trim(),
+    regions:[...picked], titles:titles.join(", "),
+    frequency_days:freq,
+    cv_filename:file.name, cv_base64:await toB64(file),
+    submitted_at:new Date().toISOString()
+  };
+
+  try{
+    if(WEBHOOK_URL){
+      if(WEBHOOK_URL.includes("webhook-test")){
+        console.warn("⚠️ تستخدم الرابط التجريبي (webhook-test). يعمل فقط أثناء الضغط على Listen for test event في n8n. للإنتاج استخدم /webhook/ بدون -test.");
+      }
+      const r=await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      if(!r.ok) throw new Error("HTTP "+r.status+(r.status===404?" — الوورك فلو غير مُفعّل (Active) أو الرابط خطأ":""));
+    }else{
+      console.log("WEBHOOK_URL غير مضبوط — بيانات النموذج:",payload);
+      await new Promise(r=>setTimeout(r,500));
+    }
+    const first = freq===1 ? "غدًا" : freq===2 ? "بعد يومين" : `خلال ${ar(freq)} أيام`;
+    $("f").outerHTML=`<div class="done"><div class="done-i">✓</div>
+      <h3>تم استلام طلبك</h3>
+      <p>سجّلنا اشتراكك على <b>${esc(email)}</b>. أول تقرير يوصلك ${first} — وبعدها ${everyLabel(freq)}.</p></div>`;
+    window.scrollTo({top:document.querySelector(".done").getBoundingClientRect().top+window.scrollY-120,behavior:"smooth"});
+  }catch(err){
+    btn.disabled=false; btn.textContent="ابدأ الاشتراك — ٤٩ ريال شهريًا";
+    console.error("فشل الإرسال:",err);
+    alert("تعذّر الإرسال. تحقق من اتصالك وحاول مرة أخرى.");
+  }
+});
+
+calendar(); preview();
+
+
+/* ═══════════════ الدخول وبوابة التقرير ═══════════════
+   طريقان للدخول:
+   ١) الرابط الخاص في الإيميل: ...?t=TOKEN  (بنقرة واحدة)
+   ٢) تسجيل دخول بالبريد + رمز تحقق من ٦ أرقام
+   كلاهما ينتهي إلى نفس الشيء: رمز الحساب (token) الذي يفتح التقرير. */
+
+const QS_TOKEN = new URLSearchParams(location.search).get("t");
+const STORE_KEY = "wadhefti_session";
+
+/* تخزين الجلسة اختياري — لو منعه المتصفح تعمل الصفحة كالمعتاد، فقط
+   يُطلب الدخول في كل زيارة. */
+const store = {
+  get(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY) || "null"); }catch(e){ return null; } },
+  set(v){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(v)); }catch(e){} },
+  clear(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} },
+};
+
+const P = {
+  data: null,
+  token: null,
+  tab: "matched",     // matched | rejected | applied
+  sort: "date",       // date | score
+  q: "",
+};
+
+const A = { email: "", busy: false };
+
+const dfmt = s => {
+  if(!s) return "";
+  const d = new Date(String(s).slice(0,10) + "T00:00:00");
+  if(isNaN(d)) return s;
+  const M = ["يناير","فبراير","مارس","أبريل","مايو","يونيو",
+             "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  return `${ar(d.getDate())} ${M[d.getMonth()]}`;
+};
+const jobsWord = n => n===1 ? "وظيفة واحدة" : n===2 ? "وظيفتين"
+  : n<=10 ? `${ar(n)} وظائف` : `${ar(n)} وظيفة`;
+
+/* ─────────────── شاشات الدخول ─────────────── */
+
+function showAuth(){
+  document.body.className = "auth";
+  document.title = "الدخول — وظيفتي";
+}
+
+function authEmailScreen(msg){
+  showAuth();
+  $("auth-card").innerHTML = `
+    <span class="mark"><i></i></span>
+    <h2>ادخل إلى تقريرك</h2>
+    <p class="sub">اكتب بريدك المسجّل ونرسل لك رمز دخول من ٦ أرقام.</p>
+    <label for="a-email">البريد الإلكتروني</label>
+    <input id="a-email" type="email" inputmode="email" autocomplete="email"
+           placeholder="you@example.com" value="${esc(A.email)}">
+    <button class="btn" id="a-send" type="button">أرسل رمز الدخول</button>
+    ${msg ? `<p class="msg err">${esc(msg)}</p>` : ""}
+    <button class="link" id="a-back" type="button">لست مشتركًا؟ اشترك الآن</button>`;
+
+  const go = () => requestCode();
+  $("a-email").addEventListener("keydown", e => { if(e.key === "Enter") go(); });
+  $("a-send").addEventListener("click", go);
+  $("a-back").addEventListener("click", () => {
+    document.body.className = "";
+    store.clear();
+    history.replaceState(null, "", location.pathname);
+    location.hash = "#start";
+  });
+  setTimeout(() => { const el = $("a-email"); if(el) el.focus(); }, 60);
+}
+
+function authCodeScreen(msg, kind){
+  showAuth();
+  $("auth-card").innerHTML = `
+    <span class="mark"><i></i></span>
+    <h2>اكتب رمز الدخول</h2>
+    <p class="to">أرسلناه إلى <b>${esc(A.email)}</b></p>
+    <label for="a-code">الرمز</label>
+    <input id="a-code" class="code" type="text" inputmode="numeric" autocomplete="one-time-code"
+           maxlength="6" placeholder="······">
+    <button class="btn" id="a-ok" type="button">دخول</button>
+    ${msg ? `<p class="msg ${kind === "ok" ? "ok" : "err"}">${esc(msg)}</p>` : ""}
+    <button class="link" id="a-again" type="button">لم يصلك الرمز؟ أعد الإرسال</button>
+    <button class="link" id="a-other" type="button">استخدام بريد آخر</button>`;
+
+  const el = $("a-code");
+  el.addEventListener("input", () => {
+    el.value = el.value.replace(/\D/g, "").slice(0, 6);
+    if(el.value.length === 6) submitCode();   // يدخل تلقائيًا عند اكتمال الرمز
+  });
+  el.addEventListener("keydown", e => { if(e.key === "Enter") submitCode(); });
+  $("a-ok").addEventListener("click", submitCode);
+  $("a-again").addEventListener("click", () => requestCode(true));
+  $("a-other").addEventListener("click", () => { A.email = ""; authEmailScreen(); });
+  setTimeout(() => el.focus(), 60);
+}
+
+async function requestCode(resend){
+  if(A.busy) return;
+  const email = (resend ? A.email : ($("a-email") ? $("a-email").value : "")).trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    authEmailScreen("اكتب بريدًا إلكترونيًا صحيحًا.");
+    return;
+  }
+  A.email = email;
+
+  if(!LOGIN_URL){
+    authEmailScreen("الصفحة غير مربوطة بعد: لم يُضبط LOGIN_URL.");
+    return;
+  }
+
+  A.busy = true;
+  const btn = $(resend ? "a-again" : "a-send");
+  if(btn){ btn.disabled = true; btn.textContent = "جارٍ الإرسال…"; }
+  try{
+    const r = await fetch(LOGIN_URL, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ email })
+    });
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    A.busy = false;
+    authCodeScreen("إذا كان البريد مسجّلًا لدينا، وصلك الرمز الآن.", "ok");
+  }catch(err){
+    A.busy = false;
+    console.error("تعذّر إرسال الرمز:", err);
+    authEmailScreen("تعذّر الإرسال. تحقق من اتصالك وحاول مرة أخرى.");
+  }
+}
+
+async function submitCode(){
+  if(A.busy) return;
+  const el = $("a-code");
+  const code = el ? el.value.replace(/\D/g, "") : "";
+  if(code.length !== 6){ authCodeScreen("الرمز يتكوّن من ٦ أرقام."); return; }
+
+  if(!VERIFY_URL){ authCodeScreen("الصفحة غير مربوطة بعد: لم يُضبط VERIFY_URL."); return; }
+
+  A.busy = true;
+  const btn = $("a-ok");
+  if(btn){ btn.disabled = true; btn.textContent = "جارٍ التحقق…"; }
+  try{
+    const r = await fetch(VERIFY_URL, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ email: A.email, code })
+    });
+    const d = await r.json().catch(() => null);
+    A.busy = false;
+    if(!d || d.ok !== true || !d.token){
+      authCodeScreen((d && d.error) || "الرمز غير صحيح أو انتهت صلاحيته.");
+      return;
+    }
+    P.token = d.token;
+    store.set({ token: d.token, email: A.email });
+    openPortal();
+  }catch(err){
+    A.busy = false;
+    console.error("تعذّر التحقق:", err);
+    authCodeScreen("تعذّر التحقق. حاول مرة أخرى.");
+  }
+}
+
+/* ─────────────── التقرير ─────────────── */
+
+function pState(icon, title, msg){
+  $("p-main").innerHTML =
+    `<div class="p-state"><div class="ic">${icon}</div>
+     <h2>${esc(title)}</h2><p>${esc(msg)}</p></div>`;
+}
+
+function jobCard(j, i, rejected){
+  const s = Math.max(0, Math.min(100, j.match_score||0));
+  const cls = rejected ? "" : (s >= 80 ? "" : "mid");
+  const badges = [
+    j.remote && /remote|عن بعد|عن بُعد|true|yes/i.test(j.remote) ? `<span class="badge rem">عن بُعد</span>` : "",
+    j.salary ? `<span class="badge sal">${esc(j.salary)}</span>` : "",
+    j.platform ? `<span class="badge">${esc(j.platform)}</span>` : "",
+    j.date_posted ? `<span class="badge">نُشرت ${esc(dfmt(j.date_posted))}</span>` : "",
+  ].join("");
+  const kws = (j.keywords||[]).slice(0,8).map(k=>`<span class="kw">${esc(k)}</span>`).join("");
+  const flags = (j.red_flags||[]).length
+    ? `<p class="flags">⚠ ${esc(j.red_flags.join(" · "))}</p>` : "";
+
+  const bits = [];
+  if(j.tailored_summary) bits.push(["ملخص مخصص لهذي الوظيفة", j.tailored_summary, `sum${i}`]);
+  if(j.tailored_bullets) bits.push(["نقاط جاهزة لسيرتك", j.tailored_bullets, `bul${i}`]);
+  if(j.cover_letter)     bits.push(["خطاب تقديم", j.cover_letter, `cov${i}`]);
+
+  const detail = bits.length ? `
+    <div class="detail" id="d${i}">
+      ${bits.map(([h,body,id])=>`
+        <div class="dsec">
+          <h4>${esc(h)}<button class="copy" type="button" data-copy="${id}">نسخ</button></h4>
+          <pre id="${id}">${esc(body)}</pre>
+        </div>`).join("")}
+    </div>` : "";
+
+  const why = rejected
+    ? (j.skip_reason ? `<p class="why rej-why">سبب الاستبعاد: ${esc(j.skip_reason)}</p>` : "")
+    : (j.reasons ? `<p class="why">${esc(j.reasons)}</p>` : "");
+
+  return `<article class="job${rejected ? " rej" : ""}">
+    <div class="job-top">
+      <div class="ring ${cls}" style="--p:${s}"><span>${ar(s)}</span></div>
+      <div style="min-width:0;flex:1">
+        <h3>${esc(j.job_title||"وظيفة")}</h3>
+        <div class="job-sub">${esc(j.company||"")}${j.location? " · "+esc(j.location):""}</div>
+        <div class="badges">${badges}</div>
+        ${why}
+        ${kws?`<div class="kws">${kws}</div>`:""}
+        ${flags}
+        <div class="job-acts">
+          ${j.job_link?`<a class="open" href="${esc(j.job_link)}" target="_blank" rel="noopener">فتح الإعلان ↗</a>`:""}
+          ${bits.length?`<button class="more" type="button" data-more="${i}">النصوص الجاهزة</button>`:""}
+        </div>
+        ${detail}
+      </div>
+    </div>
+  </article>`;
+}
+
+function applCard(a){
+  const st = /sent|أُرسل|تم/i.test(a.status) ? "sent"
+           : /wait|انتظار|قيد/i.test(a.status) ? "wait" : "";
+  return `<div class="appl">
+    <div class="appl-main">
+      <h3>${esc(a.job_title||"وظيفة")}</h3>
+      <div class="meta">${esc(a.company||"")}${a.applied_at?" · "+esc(dfmt(a.applied_at)):""}${a.method?" · "+esc(a.method):""}</div>
+    </div>
+    ${a.status?`<span class="st ${st}">${esc(a.status)}</span>`:""}
+    ${a.job_link?`<a class="open" href="${esc(a.job_link)}" target="_blank" rel="noopener">الإعلان ↗</a>`:""}
+  </div>`;
+}
+
+function listFor(tab){
+  const d = P.data;
+  if(tab === "applied"){
+    if(d.plan !== "pro"){
+      return `<div class="upsell">
+        <h3>التقديم بنقرة — الباقة المتقدمة</h3>
+        <p>نجهّز لك سيرة مخصصة وخطاب تقديم لكل وظيفة، ونرسلهما بضغطة واحدة —
+           وتتابع هنا كل ما قُدّم باسمك.</p>
+        <a class="btn" href="mailto:?subject=${encodeURIComponent("ترقية اشتراك وظيفتي")}">اسأل عن الترقية</a>
+      </div>`;
+    }
+    if(!d.applied.length){
+      return `<div class="p-state"><div class="ic">📮</div>
+        <h2>ما تم التقديم على شيء بعد</h2>
+        <p>عند إرسال أول طلب باسمك، يظهر هنا مع تاريخه وحالته.</p></div>`;
+    }
+    return d.applied.map(applCard).join("");
+  }
+
+  const rejected = tab === "rejected";
+  let jobs = (rejected ? d.rejected : d.jobs).slice();
+
+  if(P.q){
+    const q = P.q.toLowerCase();
+    jobs = jobs.filter(j =>
+      (j.job_title+" "+j.company+" "+(j.location||"")+" "+((j.keywords||[]).join(" ")))
+        .toLowerCase().includes(q));
+  }
+  if(P.sort === "score") jobs.sort((a,b)=>b.match_score-a.match_score);
+
+  if(!jobs.length){
+    if(P.q) return `<div class="p-state"><div class="ic">🔍</div>
+      <h2>ما فيه نتائج لبحثك</h2><p>جرّب كلمة أخرى أو امسح البحث.</p></div>`;
+    return rejected
+      ? `<div class="p-state"><div class="ic">✓</div>
+         <h2>ما استُبعدت وظيفة</h2>
+         <p>كل ما حلّلناه تجاوز حد التطابق — أو لم تبدأ جولاتك بعد.</p></div>`
+      : `<div class="p-state"><div class="ic">🔍</div>
+         <h2>ما وصلت وظائف بعد</h2>
+         <p>أول تقرير يوصلك على إيميلك في الجولة القادمة، وتلقاه هنا في نفس الوقت.</p></div>`;
+  }
+
+  if(P.sort === "score" || rejected){
+    return jobs.map((j,i)=>jobCard(j,i,rejected)).join("");
+  }
+
+  const byDay = {};
+  jobs.forEach(j => (byDay[j.date_found||""] = byDay[j.date_found||""]||[]).push(j));
+  let n = 0;
+  return Object.keys(byDay).map(day => {
+    const isLatest = day && day === d.latest_date;
+    const cards = byDay[day].map(j => jobCard(j, n++, rejected)).join("");
+    return `<div class="daygroup">
+      <div class="daylabel"><b>${day?esc(dfmt(day)):"بدون تاريخ"}</b>
+        <span>${esc(jobsWord(byDay[day].length))}</span>
+        ${isLatest?`<span class="new-pill">آخر تقرير</span>`:""}
+      </div>${cards}</div>`;
+  }).join("");
+}
+
+function renderReport(){
+  const d = P.data;
+  const isPro = d.plan === "pro";
+  $("p-who").innerHTML =
+    (d.client_name ? `<b>${esc(d.client_name)}</b> · ` : "") +
+    esc(everyLabel(d.frequency_days)) +
+    (isPro ? `<span class="plan-pill">متقدمة</span>` : "");
+
+  const showTools = P.tab !== "applied";
+
+  $("p-main").innerHTML = `
+    <div class="p-head"><div class="wrap">
+      <h1>${d.client_name?`تقريرك، ${esc(d.client_name)}`:"تقريرك"}</h1>
+      <p>${d.latest_date
+            ? `آخر تقرير ${esc(dfmt(d.latest_date))} — ${esc(jobsWord(d.latest_count))}`
+            : "لم يصدر تقرير بعد"}</p>
+      <div class="stats">
+        <div class="stat"><div class="v">${ar(d.analyzed_total)}</div><div class="k">وظيفة حُلّلت لك</div></div>
+        <div class="stat"><div class="v">${ar(d.total)}</div><div class="k">تجاوزت حد التطابق</div></div>
+        <div class="stat"><div class="v">${ar(d.avg_score)}٪</div><div class="k">متوسط التطابق</div></div>
+      </div>
+    </div></div>
+    <div class="p-body">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" type="button" data-tab="matched"  aria-selected="${P.tab==="matched"}">
+          المطابقة <span class="n">${ar(d.total)}</span></button>
+        <button class="tab" role="tab" type="button" data-tab="rejected" aria-selected="${P.tab==="rejected"}">
+          المستبعدة <span class="n">${ar(d.rejected_total)}</span></button>
+        <button class="tab" role="tab" type="button" data-tab="applied"  aria-selected="${P.tab==="applied"}">
+          تم التقديم${isPro?` <span class="n">${ar(d.applied_total)}</span>`:""}</button>
+      </div>
+      ${showTools ? `
+      <div class="tools">
+        <input id="p-q" type="search" placeholder="ابحث في وظائفك…" value="${esc(P.q)}">
+        <div class="sorts">
+          <button class="sort" type="button" data-sort="date"  aria-pressed="${P.sort==="date"}">الأحدث</button>
+          <button class="sort" type="button" data-sort="score" aria-pressed="${P.sort==="score"}">الأعلى تطابقًا</button>
+        </div>
+      </div>` : ""}
+      ${listFor(P.tab)}
+      <p class="p-note">هذي صفحتك الخاصة — لا تشارك رابطها.<br>
+        ما نقدّم على أي وظيفة نيابة عنك دون إذنك.</p>
+    </div>`;
+
+  document.querySelectorAll("[data-tab]").forEach(b =>
+    b.addEventListener("click", () => { P.tab = b.dataset.tab; P.q = ""; renderReport(); }));
+
+  const q = $("p-q");
+  if(q){
+    q.addEventListener("input", e => { P.q = e.target.value.trim();
+      const pos = e.target.selectionStart; renderReport();
+      const nq = $("p-q"); if(nq){ nq.focus(); nq.setSelectionRange(pos,pos); } });
+  }
+  document.querySelectorAll("[data-sort]").forEach(b =>
+    b.addEventListener("click", () => { P.sort = b.dataset.sort; renderReport(); }));
+  document.querySelectorAll("[data-more]").forEach(b =>
+    b.addEventListener("click", () => {
+      const d2 = $("d"+b.dataset.more);
+      const on = d2.classList.toggle("on");
+      b.textContent = on ? "إخفاء النصوص" : "النصوص الجاهزة";
+    }));
+  document.querySelectorAll("[data-copy]").forEach(b =>
+    b.addEventListener("click", async () => {
+      const el = $(b.dataset.copy); if(!el) return;
+      try{ await navigator.clipboard.writeText(el.textContent); }
+      catch(e){
+        const r = document.createRange(); r.selectNodeContents(el);
+        const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      }
+      b.textContent = "تم النسخ ✓"; b.classList.add("done");
+      setTimeout(()=>{ b.textContent="نسخ"; b.classList.remove("done"); }, 1800);
+    }));
+}
+
+async function loadReport(){
+  if(!REPORT_URL){
+    pState("⚙️","الصفحة غير مربوطة بعد",
+      "لم يُضبط REPORT_URL في ملف الصفحة. أضف رابط /webhook/report من n8n ثم ارفع الصفحة مرة أخرى.");
+    return;
+  }
+  try{
+    const r = await fetch(REPORT_URL + (REPORT_URL.includes("?")?"&":"?") + "t=" + encodeURIComponent(P.token),
+                          {headers:{"Accept":"application/json"}});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const d = await r.json();
+    if(!d || d.ok === false){
+      // رمز غير صالح أو منتهٍ: امسح الجلسة وأعد الدخول بدل عرض خطأ مسدود
+      store.clear();
+      authEmailScreen((d && d.error) || "انتهت الجلسة. سجّل دخولك من جديد.");
+      return;
+    }
+    d.jobs     = Array.isArray(d.jobs) ? d.jobs : [];
+    d.rejected = Array.isArray(d.rejected) ? d.rejected : [];
+    d.applied  = Array.isArray(d.applied) ? d.applied : [];
+    if(typeof d.analyzed_total !== "number") d.analyzed_total = d.jobs.length + d.rejected.length;
+    if(typeof d.rejected_total !== "number") d.rejected_total = d.rejected.length;
+    if(typeof d.applied_total  !== "number") d.applied_total  = d.applied.length;
+    P.data = d;
+    renderReport();
+  }catch(err){
+    console.error("تعذّر تحميل التقرير:", err);
+    pState("⚠️","تعذّر تحميل التقرير",
+      "تأكد من اتصالك بالإنترنت وحاول مرة أخرى. إذا تكررت المشكلة راسلنا.");
+  }
+}
+
+function openPortal(){
+  document.body.className = "portal";
+  document.title = "تقريرك — وظيفتي";
+  $("p-main").innerHTML = `<div class="p-body"><div class="skel"></div><div class="skel"></div></div>`;
+  loadReport();
+}
+
+$("p-refresh").addEventListener("click", () => {
+  $("p-main").innerHTML = `<div class="p-body"><div class="skel"></div><div class="skel"></div></div>`;
+  loadReport();
+});
+$("p-out").addEventListener("click", () => {
+  store.clear(); P.token = null; P.data = null; P.tab = "matched"; P.q = "";
+  history.replaceState(null, "", location.pathname);
+  A.email = ""; authEmailScreen();
+});
+
+const navLogin = $("nav-login");
+if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailScreen(); });
+
+/* البداية: رابط الإيميل، ثم جلسة محفوظة، وإلا فصفحة التسويق كما هي. */
+(function start(){
+  if(QS_TOKEN){
+    P.token = QS_TOKEN;
+    store.set({ token: QS_TOKEN, email: "" });
+    openPortal();
+    return;
+  }
+  const s = store.get();
+  if(s && s.token){
+    P.token = s.token;
+    A.email = s.email || "";
+    openPortal();
+    return;
+  }
+  // لا جلسة: تبقى صفحة التسويق ظاهرة، وزر «دخول» في الشريط العلوي يفتح الدخول.
+})();
+</script>
+</body>
+</html>
