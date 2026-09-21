@@ -288,17 +288,22 @@ body.portal #portal{display:block}
 .ring::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--paper)}
 .ring span{position:relative;z-index:1;color:var(--match)}
 .ring.mid span{color:var(--dawn2)} .ring.mid::before{background:conic-gradient(var(--dawn) calc(var(--p)*1%),transparent 0)}
-.job h3{margin:0 0 4px;font-size:17.5px;font-weight:600;line-height:1.35}
-.job-sub{font-size:14px;color:var(--slate);margin-bottom:9px}
+/* Mixed-language content: job titles, reasons and the prepared texts arrive
+   in Arabic or English depending on the posting. These take their direction
+   from their own text instead of inheriting the page's RTL. */
+.bidi{unicode-bidi:plaintext;text-align:start}
+.job h3{margin:0 0 4px;font-size:17.5px;font-weight:600;line-height:1.35;
+  unicode-bidi:plaintext;text-align:start}
+.job-sub{font-size:14px;color:var(--slate);margin-bottom:9px;unicode-bidi:plaintext;text-align:start}
 .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .badge{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--wash);color:var(--slate)}
 .badge.rem{background:rgba(28,155,106,.12);color:var(--match)}
 .badge.sal{background:rgba(242,169,60,.15);color:var(--dawn2)}
-.why{font-size:14.5px;color:var(--slate);line-height:1.6;margin:0 0 10px}
+.why{font-size:14.5px;color:var(--slate);line-height:1.6;margin:0 0 10px;unicode-bidi:plaintext;text-align:start}
 .kws{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
 .kw{font-size:12.5px;padding:4px 11px;border-radius:7px;background:var(--wash);color:var(--ink);
   border:1px solid var(--line)}
-.flags{font-size:13.5px;color:var(--warn);margin:0 0 10px}
+.flags{font-size:13.5px;color:var(--warn);margin:0 0 10px;unicode-bidi:plaintext;text-align:start}
 .job-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .open{background:var(--ink);color:var(--paper);text-decoration:none;padding:9px 18px;border-radius:9px;
   font-size:14px;font-weight:500;transition:.15s}
@@ -317,6 +322,7 @@ body.portal #portal{display:block}
 .copy:hover{color:var(--ink);border-color:var(--slate)}
 .copy.done{background:rgba(28,155,106,.13);color:var(--match);border-color:transparent}
 .dsec pre{margin:0;white-space:pre-wrap;font:inherit;font-size:14.5px;line-height:1.72;
+  unicode-bidi:plaintext;text-align:start;
   color:var(--ink);background:var(--wash);padding:14px 16px;border-radius:10px}
 
 /* ---------- login ---------- */
@@ -364,8 +370,8 @@ body.portal #portal{display:block}
 .appl{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:var(--r);
   padding:15px 18px;margin-bottom:10px;background:var(--paper)}
 .appl-main{flex:1;min-width:0}
-.appl h3{margin:0 0 3px;font-size:16px;font-weight:600}
-.appl .meta{font-size:13px;color:var(--mute)}
+.appl h3{margin:0 0 3px;font-size:16px;font-weight:600;unicode-bidi:plaintext;text-align:start}
+.appl .meta{font-size:13px;color:var(--mute);unicode-bidi:plaintext;text-align:start}
 .st{font-size:12px;padding:4px 11px;border-radius:99px;white-space:nowrap;
   background:var(--wash);color:var(--slate)}
 .st.sent{background:rgba(28,155,106,.12);color:var(--match)}
@@ -1046,7 +1052,7 @@ function jobCard(j, i, rejected){
   ].join("");
   const kws = (j.keywords||[]).slice(0,8).map(k=>`<span class="kw">${esc(k)}</span>`).join("");
   const flags = (j.red_flags||[]).length
-    ? `<p class="flags">⚠ ${esc(j.red_flags.join(" · "))}</p>` : "";
+    ? `<p class="flags" dir="auto">⚠ ${esc(j.red_flags.join(" · "))}</p>` : "";
 
   const bits = [];
   if(j.tailored_summary) bits.push(["ملخص مخصص لهذي الوظيفة", j.tailored_summary, `sum${i}`]);
@@ -1058,20 +1064,20 @@ function jobCard(j, i, rejected){
       ${bits.map(([h,body,id])=>`
         <div class="dsec">
           <h4>${esc(h)}<button class="copy" type="button" data-copy="${id}">نسخ</button></h4>
-          <pre id="${id}">${esc(body)}</pre>
+          <pre id="${id}" dir="auto">${esc(body)}</pre>
         </div>`).join("")}
     </div>` : "";
 
   const why = rejected
-    ? (j.skip_reason ? `<p class="why rej-why">سبب الاستبعاد: ${esc(j.skip_reason)}</p>` : "")
-    : (j.reasons ? `<p class="why">${esc(j.reasons)}</p>` : "");
+    ? (j.skip_reason ? `<p class="why rej-why" dir="auto">سبب الاستبعاد: ${esc(j.skip_reason)}</p>` : "")
+    : (j.reasons ? `<p class="why" dir="auto">${esc(j.reasons)}</p>` : "");
 
   return `<article class="job${rejected ? " rej" : ""}">
     <div class="job-top">
       <div class="ring ${cls}" style="--p:${s}"><span>${ar(s)}</span></div>
       <div style="min-width:0;flex:1">
-        <h3>${esc(j.job_title||"وظيفة")}</h3>
-        <div class="job-sub">${esc(j.company||"")}${j.location? " · "+esc(j.location):""}</div>
+        <h3 dir="auto">${esc(j.job_title||"وظيفة")}</h3>
+        <div class="job-sub" dir="auto">${esc(j.company||"")}${j.location? " · "+esc(j.location):""}</div>
         <div class="badges">${badges}</div>
         ${why}
         ${kws?`<div class="kws">${kws}</div>`:""}
@@ -1091,8 +1097,8 @@ function applCard(a){
            : /wait|انتظار|قيد/i.test(a.status) ? "wait" : "";
   return `<div class="appl">
     <div class="appl-main">
-      <h3>${esc(a.job_title||"وظيفة")}</h3>
-      <div class="meta">${esc(a.company||"")}${a.applied_at?" · "+esc(dfmt(a.applied_at)):""}${a.method?" · "+esc(a.method):""}</div>
+      <h3 dir="auto">${esc(a.job_title||"وظيفة")}</h3>
+      <div class="meta" dir="auto">${esc(a.company||"")}${a.applied_at?" · "+esc(dfmt(a.applied_at)):""}${a.method?" · "+esc(a.method):""}</div>
     </div>
     ${a.status?`<span class="st ${st}">${esc(a.status)}</span>`:""}
     ${a.job_link?`<a class="open" href="${esc(a.job_link)}" target="_blank" rel="noopener">الإعلان ↗</a>`:""}
