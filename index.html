@@ -1095,7 +1095,14 @@ function jobCard(j, i, rejected){
 function applCard(a){
   const st = /sent|أُرسل|تم/i.test(a.status) ? "sent"
            : /wait|انتظار|قيد/i.test(a.status) ? "wait" : "";
+  // The score is what justified applying at all, so it belongs on the card —
+  // same ring as the matched list, for one visual language across the tabs.
+  const s = Math.max(0, Math.min(100, a.match_score||0));
+  const ring = s
+    ? `<div class="ring ${s >= 80 ? "" : "mid"}" style="--p:${s}"><span>${ar(s)}</span></div>`
+    : "";
   return `<div class="appl">
+    ${ring}
     <div class="appl-main">
       <h3 dir="auto">${esc(a.job_title||"وظيفة")}</h3>
       <div class="meta" dir="auto">${[a.company, a.applied_at?dfmt(a.applied_at):"", a.method]
