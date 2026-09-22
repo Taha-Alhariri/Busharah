@@ -1098,7 +1098,8 @@ function applCard(a){
   return `<div class="appl">
     <div class="appl-main">
       <h3 dir="auto">${esc(a.job_title||"وظيفة")}</h3>
-      <div class="meta" dir="auto">${esc(a.company||"")}${a.applied_at?" · "+esc(dfmt(a.applied_at)):""}${a.method?" · "+esc(a.method):""}</div>
+      <div class="meta" dir="auto">${[a.company, a.applied_at?dfmt(a.applied_at):"", a.method]
+        .filter(Boolean).map(esc).join(" · ") || "&#8212;"}</div>
     </div>
     ${a.status?`<span class="st ${st}">${esc(a.status)}</span>`:""}
     ${a.job_link?`<a class="open" href="${esc(a.job_link)}" target="_blank" rel="noopener">الإعلان ↗</a>`:""}
