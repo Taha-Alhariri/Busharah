@@ -332,6 +332,52 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.video-bg video{display:none!important}.job:hover,.step:hover,.btn:hover,.nav-cta:hover,.submit:hover,.open:hover{transform:none}}
 @media(prefers-reduced-data:reduce){.video-bg video{display:none!important}}
 @media print{.site-nav,.p-nav,.portal-sidebar,.nav-actions,.video-bg,.hero,.signup,.final-cta,.copy,.more,.job-acts,.tools{display:none!important}#p-main{margin:0}.p-head{padding:0}.p-head>.wrap{color:#000;background:#fff;border:1px solid #ccc}.stat .v,.stat .k,.p-head p{color:#000}.job{break-inside:avoid;box-shadow:none}body{background:#fff;color:#000}}
+
+/* ═══════════ تحدي بشارة ═══════════ */
+.challenge{padding:90px 0 20px}
+.ch-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}
+.ch-prize{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:26px 0 30px;padding:20px 22px;border-radius:18px;background:var(--accent-soft);border:1px solid var(--line)}
+.ch-prize .num{font-size:clamp(34px,5vw,48px);font-weight:700;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.ch-prize .eq{font-size:22px;color:var(--dawn2)}
+.ch-prize .lbl{font-size:13px;color:var(--slate);display:block;margin-top:6px}
+.ch-steps{display:grid;gap:14px;margin:0;padding:0;list-style:none;counter-reset:ch}
+.ch-steps li{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start}
+.ch-steps li::before{counter-increment:ch;content:counter(ch,arabic-indic);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--dawn);color:var(--night);font-weight:700;font-size:15px}
+.ch-steps b{display:block;font-size:15.5px;color:var(--ink)}
+.ch-steps span{font-size:14px;color:var(--slate);line-height:1.8}
+.ch-plat{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.ch-plat span{font-size:12.5px;padding:5px 12px;border-radius:99px;border:1px solid var(--line);background:var(--paper);color:var(--slate)}
+.ch-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:var(--shadow-sm)}
+.ch-card h3{margin:0 0 6px;font-size:19px;font-weight:600}
+.ch-card > p{margin:0 0 18px;color:var(--slate);font-size:14px}
+.ch-card label{display:block;font-size:13px;font-weight:500;margin:14px 0 6px;color:var(--ink)}
+.ch-card input,.ch-card select{width:100%;font:inherit;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.ch-card input[type=url]{direction:ltr;text-align:left}
+.ch-card .btn{width:100%;margin-top:18px}
+.ch-msg{display:none;margin-top:14px;padding:12px 14px;border-radius:12px;font-size:13.5px;line-height:1.8}
+.ch-msg.on{display:block}
+.ch-msg.ok{background:var(--accent-soft);color:var(--ink)}
+.ch-msg.err{background:color-mix(in srgb,var(--warn) 9%,var(--paper));color:var(--warn)}
+.ch-terms{margin-top:16px;font-size:13px;color:var(--slate)}
+.ch-terms summary{cursor:pointer;color:var(--ink);font-weight:500}
+.ch-terms ul{margin:10px 0 0;padding-inline-start:20px;line-height:1.9}
+@media (max-width:860px){.ch-grid{grid-template-columns:1fr}.challenge{padding:64px 0 10px}}
+/* سعر المؤسسين تحت السعر */
+.founders{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--accent-soft);color:var(--ink);font-size:12.5px;line-height:1.7}
+.founders b{font-weight:600}
+/* ═══════════ برامج بشارة ═══════════ */
+.programs{padding:70px 0 10px}
+.pg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pg{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:10px}
+.pg-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pg h3{margin:0;font-size:17px;font-weight:600}
+.pg p{margin:0;color:var(--slate);font-size:14px;line-height:1.85}
+.pg .deal{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink)}
+.pg .deal b{font-weight:600}
+.pg-state{font-size:11.5px;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.pg-state.live{background:var(--accent-soft);color:var(--ink)}
+.pg-state.soon{border:1px solid var(--line);color:var(--mute)}
+@media (max-width:860px){.pg-grid{grid-template-columns:1fr}.programs{padding:56px 0 6px}}
 </style>
 </head>
 <body id="top">
@@ -368,7 +414,7 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
 </div>
 <div id="site"><nav class="site-nav" aria-label="القائمة الرئيسية"><div class="nav-in">
  <a href="#top" aria-label="بشارة، الرئيسية" style="text-decoration:none"><span class="brand"><span class="mark" aria-hidden="true"><i></i></span><span>بشارة<small>BISHARA</small></span></span></a>
- <div class="nav-links" id="site-links"><a href="#how-it-works">كيف تعمل بشارة</a><a href="#intelligence">لماذا بشارة</a><a href="#plans-sec">الباقات</a><button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="تفعيل المظهر الداكن" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#i-moon"></use></svg></button></div>
+ <div class="nav-links" id="site-links"><a href="#how-it-works">كيف تعمل بشارة</a><a href="#intelligence">لماذا بشارة</a><a href="#plans-sec">الباقات</a><a href="#challenge" id="nav-challenge" hidden>تحدي بشارة</a><button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="تفعيل المظهر الداكن" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#i-moon"></use></svg></button></div>
  <div class="nav-actions"><button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="تفعيل المظهر الداكن" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#i-moon"></use></svg></button><button class="ghost" id="nav-login" type="button">تسجيل الدخول</button><a class="nav-cta" href="#start">ابدأ رحلتك</a><button class="icon-btn menu-toggle" id="site-menu-toggle" type="button" aria-label="فتح قائمة التنقل" aria-controls="site-links" aria-expanded="false"><svg class="icon " aria-hidden="true"><use href="#i-menu"></use></svg></button></div>
 </div></nav><main id="site-content" tabindex="-1"><header class="hero"><div class="video-bg" data-video-slot="hero" aria-hidden="true"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjNjk5ODVhIiBzdG9wLW9wYWNpdHk9Ii4zIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDkyZjJiIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNiNGQxODUiIHN0cm9rZS1vcGFjaXR5PSIuMTkiIHN0cm9rZS13aWR0aD0iMSI+PGNpcmNsZSBjeD0iMjg1IiBjeT0iMjgwIiByPSIyMDAiLz48Y2lyY2xlIGN4PSIyODUiIGN5PSIyODAiIHI9IjI0NSIvPjxjaXJjbGUgY3g9IjI4NSIgY3k9IjI4MCIgcj0iMjkwIi8+PC9nPjwvc3ZnPg==" alt="" width="1200" height="600" decoding="async" ></div>
  <div class="wrap hero-in"><div class="hero-copy rise">
@@ -402,6 +448,7 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
         <div class="plan-top"><h3>الأساسية</h3></div>
         <p class="tag-line">نبحث ونقيّم ونجهّز، وأنت تقدّم.</p>
         <div class="pn"><b>٤٩</b><span>ريال / شهريًا</span></div>
+        <p class="founders"><b>سعر المؤسسين:</b> أول ١٠٠ مشترك يثبت لهم هذا السعر ما دام اشتراكهم مستمرًا.</p>
         <ul class="incl">
           <li><span class="tick">✓</span> بحث وتقييم على الوتيرة التي تختارها</li>
           <li><span class="tick">✓</span> فرص جديدة دون تكرار الوظائف السابقة</li>
@@ -509,6 +556,7 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
 
       <p class="preview-caption">أمثلة توضيحية للتقرير؛ تظهر نتائجك الفعلية في حسابك.</p><div class="price">
         <div class="pn"><b>٤٩</b><span>ريال / شهريًا</span></div>
+        <p class="founders"><b>سعر المؤسسين:</b> أول ١٠٠ مشترك يثبت لهم هذا السعر ما دام اشتراكهم مستمرًا.</p>
         <ul class="incl">
           <li><span class="tick">✓</span> بحث وتقييم على الوتيرة التي تختارها</li>
           <li><span class="tick">✓</span> فرص جديدة دون تكرار الوظائف السابقة</li>
@@ -519,6 +567,71 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
         </ul>
       </div>
     </div>
+  </div>
+</div></section><section class="challenge" id="challenge" hidden><div class="wrap"><div class="ch-grid">
+  <div>
+    <span class="section-kicker">تحدي بشارة</span>
+    <h2>انشر عن بشارة، واربح نصف الشهر.</h2>
+    <p style="color:var(--slate);font-size:15px;line-height:1.9;margin:0;max-width:56ch">صوّر مقطعًا عن تجربتك مع بشارة وانشره على حسابك. إذا تجاوز ١٥ ألف مشاهدة، يصلك كود خصم ٥٠٪ على اشتراك الشهر التالي.</p>
+    <div class="ch-prize" aria-label="١٥ ألف مشاهدة تساوي خصم ٥٠٪">
+      <div><span class="num">١٥٬٠٠٠</span><span class="lbl">مشاهدة</span></div>
+      <span class="eq" aria-hidden="true">←</span>
+      <div><span class="num">٥٠٪</span><span class="lbl">خصم على الشهر القادم</span></div>
+    </div>
+    <ol class="ch-steps">
+      <li><div><b>صوّر وانشر</b><span>اعرض بشارة بطريقتك: كيف تصلك الوظائف، وما الذي أعجبك فيها. اذكر «بشارة» بوضوح في المقطع.</span></div></li>
+      <li><div><b>اجمع ١٥ ألف مشاهدة</b><span>خلال ٣٠ يومًا من نشره، والمقطع عام يراه الجميع.</span></div></li>
+      <li><div><b>أرسل الرابط</b><span>نتحقق من المشاهدات، ونرسل كود الخصم إلى بريدك.</span></div></li>
+    </ol>
+    <div class="ch-plat" aria-label="المنصات المقبولة"><span>تيك توك</span><span>إنستغرام</span><span>سناب شات</span></div>
+  </div>
+  <form class="ch-card" id="ch-form" novalidate>
+    <h3>شارك مقطعك</h3>
+    <p>أرسل الرابط بعد النشر، ونراجعه حين يبلغ المشاهدات.</p>
+    <label for="ch-email">بريدك المسجّل في بشارة</label>
+    <input id="ch-email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com">
+    <label for="ch-platform">المنصة</label>
+    <select id="ch-platform">
+      <option value="">اختر المنصة</option>
+      <option value="tiktok">تيك توك</option>
+      <option value="instagram">إنستغرام</option>
+      <option value="snapchat">سناب شات</option>
+    </select>
+    <label for="ch-url">رابط المقطع</label>
+    <input id="ch-url" type="url" inputmode="url" placeholder="https://www.tiktok.com/@you/video/…">
+    <button class="btn" id="ch-go" type="submit">أرسل المقطع</button>
+    <div class="ch-msg" id="ch-msg" role="status" aria-live="polite"></div>
+    <details class="ch-terms">
+      <summary>الشروط</summary>
+      <ul>
+        <li>التحدي للمشتركين، بالبريد المسجّل في بشارة.</li>
+        <li>المقطع عام، يذكر بشارة بوضوح، ومنشور بعد اشتراكك.</li>
+        <li>تُحتسب المشاهدات خلال ٣٠ يومًا من تاريخ النشر.</li>
+        <li>مكافأة واحدة لكل مشترك في الشهر.</li>
+        <li>نستبعد المقاطع ذات المشاهدات المشتراة أو غير الطبيعية.</li>
+        <li>الخصم كود يُطبَّق عند الدفع، ويُفعَّل مع إطلاق الدفع الإلكتروني.</li>
+      </ul>
+    </details>
+  </form>
+</div></div></section><section class="programs" id="programs"><div class="wrap">
+  <div class="head"><span class="section-kicker">برامج بشارة</span><h2>انضم مبكرًا، وشارك بشارة مع غيرك.</h2>
+    <p>مزايا لمن يبدأ معنا الآن، ولمن يعرّف غيره ببشارة.</p></div>
+  <div class="pg-grid">
+    <article class="pg">
+      <div class="pg-top"><h3>سعر المؤسسين</h3><span class="pg-state live">متاح الآن</span></div>
+      <p>أول ١٠٠ مشترك في الباقة الأساسية يثبت لهم سعر ٤٩ ريالًا، مهما تغيّرت الأسعار لاحقًا.</p>
+      <div class="deal"><b>الشرط:</b> أن يبقى الاشتراك مستمرًا دون انقطاع.</div>
+    </article>
+    <article class="pg">
+      <div class="pg-top"><h3>ادعُ صديقًا</h3><span class="pg-state soon">قريبًا</span></div>
+      <p>لكل مشترك كود دعوة خاص. حين يشترك صديقك بكودك، يحصل كلاكما على خصم.</p>
+      <div class="deal">يُفعَّل مع إطلاق الدفع الإلكتروني.</div>
+    </article>
+    <article class="pg">
+      <div class="pg-top"><h3>سفراء الجامعات</h3><span class="pg-state soon">قريبًا</span></div>
+      <p>للطلاب والخريجين الجدد: شارك كودك مع دفعتك، وكل ٥ اشتراكات بكودك تمنحك شهرًا مجانيًا.</p>
+      <div class="deal">يُفعَّل مع إطلاق الدفع الإلكتروني.</div>
+    </article>
   </div>
 </div></section><section class="final-cta"><div class="wrap"><div class="final-panel"><div class="video-bg" data-video-slot="cta" aria-hidden="true"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjNjk5ODVhIiBzdG9wLW9wYWNpdHk9Ii4zIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDkyZjJiIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZykiLz48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNiNGQxODUiIHN0cm9rZS1vcGFjaXR5PSIuMTkiIHN0cm9rZS13aWR0aD0iMSI+PGVsbGlwc2UgY3g9IjEwNTAiIGN5PSI0MDAiIHJ4PSI1MzAiIHJ5PSIyODAiLz48ZWxsaXBzZSBjeD0iMTA1MCIgY3k9IjQwMCIgcng9IjQxMCIgcnk9IjIwNSIvPjxlbGxpcHNlIGN4PSIxMDUwIiBjeT0iNDAwIiByeD0iMjgwIiByeT0iMTQwIi8+PC9nPjwvc3ZnPg==" alt="" width="1200" height="600" decoding="async" loading="lazy"></div><div><span class="section-kicker">من هنا تبدأ الحكاية</span><h2>بشارتك القادمة، قد تكون فرصة.</h2><p>ابدأ البحث الذي يضع طموحك في المقدّمة.</p></div><a href="#start" class="btn">ابدأ مع بشارة <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a></div></div></section></main><footer><div class="foot"><span class="brand"><span class="mark" aria-hidden="true"><i></i></span><span>بشارة<small>BISHARA</small></span></span><span class="footer-tagline">التوظيف الذكي، بطريقة أبسط.</span><span>الدمام، المملكة العربية السعودية</span></div></footer></div>
 <!-- Original application logic. Only the documented UI strings/markup differ. -->
@@ -539,6 +652,10 @@ const REPORT_URL  = "https://tahatest1.app.n8n.cloud/webhook/report";
 /* ⬇⬇⬇  ورابطا تسجيل الدخول — نفس العنوان بـ login و verify  ⬇⬇⬇  */
 const LOGIN_URL   = "https://tahatest1.app.n8n.cloud/webhook/login";
 const VERIFY_URL  = "https://tahatest1.app.n8n.cloud/webhook/verify";
+// تحدي بشارة: يحفظ رابط المقطع في تبويب Challenges لتراجعه يدويًا.
+const CHALLENGE_URL = "https://tahatest1.app.n8n.cloud/webhook/challenge";
+// التحدي مخفي حتى تتأكد من اشتراطات الإعلان (رخصة موثوق). اجعلها true لإظهاره.
+const SHOW_CHALLENGE = false;
 /* ══════════════════════════════════════════════════════════════════ */
 
 const REGIONS = ["الرياض","الدمام","الخبر","الظهران","الجبيل","جدة","مكة المكرمة","المدينة المنورة","أبها","عن بُعد"];
@@ -1046,7 +1163,11 @@ function listFor(tab){
       (j.job_title+" "+j.company+" "+(j.location||"")+" "+((j.keywords||[]).join(" ")))
         .toLowerCase().includes(q));
   }
-  if(P.sort === "score") jobs.sort((a,b)=>b.match_score-a.match_score);
+  // «الأحدث» = تاريخ نشر الوظيفة، وإن غاب فيوم وصولها في التقرير.
+  // «الأعلى تطابقًا» = الدرجة، والأحدث نشرًا عند التساوي.
+  const posted = j => Date.parse(j.date_posted||"") || Date.parse((j.date_found||"")+"T00:00:00Z") || 0;
+  if(P.sort === "score") jobs.sort((a,b)=>(b.match_score-a.match_score) || (posted(b)-posted(a)));
+  else jobs.sort((a,b)=>(posted(b)-posted(a)) || (b.match_score-a.match_score));
 
   if(!jobs.length){
     if(P.q) return `<div class="p-state"><div class="ic">🔍</div>
@@ -1067,7 +1188,8 @@ function listFor(tab){
   const byDay = {};
   jobs.forEach(j => (byDay[j.date_found||""] = byDay[j.date_found||""]||[]).push(j));
   let n = 0;
-  return Object.keys(byDay).map(day => {
+  // أحدث تقرير أولًا؛ وداخل كل يوم يبقى ترتيب النشر من الأحدث.
+  return Object.keys(byDay).sort((a,b)=> (b||"") < (a||"") ? -1 : (b||"") > (a||"") ? 1 : 0).map(day => {
     const isLatest = day && day === d.latest_date;
     const cards = byDay[day].map(j => jobCard(j, n++, rejected)).join("");
     return `<div class="daygroup">
@@ -1231,6 +1353,47 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
   // جاء من زر «افتح تقريرك» في الإيميل، أو من رابط قديم: اعرض الدخول مباشرة.
   if(QS_LEGACY_TOKEN || QS_LOGIN){ A.email = ""; authEmailScreen(); return; }
   // لا جلسة: تبقى صفحة التسويق ظاهرة، وزر «دخول» في الشريط العلوي يفتح الدخول.
+})();
+
+/* ═══════════ تحدي بشارة ═══════════ */
+(function(){
+  const form = document.getElementById("ch-form");
+  if(!form) return;
+  if(SHOW_CHALLENGE){
+    const sec = document.getElementById("challenge"), nav = document.getElementById("nav-challenge");
+    if(sec) sec.hidden = false;
+    if(nav) nav.hidden = false;
+  }
+  const HOSTS = { tiktok:/(^|\.)tiktok\.com$/i, instagram:/(^|\.)instagram\.com$/i, snapchat:/(^|\.)snapchat\.com$/i };
+  const msg = document.getElementById("ch-msg"), go = document.getElementById("ch-go");
+  const say = (text, ok) => { msg.textContent = text; msg.className = "ch-msg on " + (ok ? "ok" : "err"); };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("ch-email").value.trim().toLowerCase();
+    const platform = document.getElementById("ch-platform").value;
+    const url = document.getElementById("ch-url").value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return say("اكتب بريدك المسجّل في بشارة.");
+    if(!HOSTS[platform]) return say("اختر المنصة التي نشرت عليها.");
+    let host = "";
+    try{ const u = new URL(url); if(!/^https?:$/.test(u.protocol)) throw 0; host = u.hostname; }
+    catch(err){ return say("الصق رابط المقطع كاملًا، يبدأ بـ https://"); }
+    if(!HOSTS[platform].test(host)) return say("الرابط لا يطابق المنصة التي اخترتها.");
+    go.disabled = true; go.textContent = "جارٍ الإرسال…";
+    try{
+      const r = await fetch(CHALLENGE_URL, { method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ email, platform, video_url:url, submitted_at:new Date().toISOString() }) });
+      const d = await r.json().catch(() => null);
+      if(d && d.ok === false) return say(d.message || "تعذّر الإرسال. تأكد من الرابط وحاول مرة أخرى.");
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      form.reset();
+      say("وصلنا مقطعك. نراجع المشاهدات حين يبلغ ١٥ ألفًا، ونراسلك على بريدك.", true);
+    }catch(err){
+      console.error("تعذّر إرسال مقطع التحدي:", err);
+      say("تعذّر الإرسال. تحقق من اتصالك وحاول مرة أخرى.");
+    }finally{
+      go.disabled = false; go.textContent = "أرسل المقطع";
+    }
+  });
 })();
 </script>
 <!-- Optional local media slots: fill source paths only when actual video assets exist. -->
