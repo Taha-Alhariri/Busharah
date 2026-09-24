@@ -378,9 +378,95 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
 .pg-state.live{background:var(--accent-soft);color:var(--ink)}
 .pg-state.soon{border:1px solid var(--line);color:var(--mute)}
 @media (max-width:860px){.pg-grid{grid-template-columns:1fr}.programs{padding:56px 0 6px}}
+
+/* ═══════════ مقدمة بشارة (تظهر مرة واحدة في الزيارة) ═══════════ */
+.splash{position:fixed;inset:0;z-index:9999;background:#092f2b;display:grid;place-items:center;cursor:pointer;
+  clip-path:inset(0 0 0 0 round 0);transition:clip-path 780ms cubic-bezier(.76,0,.24,1);
+  animation:sp-failsafe 0s linear 5s forwards}
+.splash::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 45% at 50% 42%,rgba(215,239,135,.13),transparent 70%)}
+.splash.sp-out{clip-path:inset(0 0 100% 0 round 0 0 56px 56px)}
+.sp-stage{position:relative;display:grid;justify-items:center;gap:22px;transition:transform 780ms cubic-bezier(.76,0,.24,1),opacity 500ms}
+.splash.sp-out .sp-stage{transform:translateY(-60px) scale(.92);opacity:0}
+.sp-logo{position:relative;width:104px;height:104px}
+.sp-logo svg{width:100%;height:100%;overflow:visible}
+.sp-tile{fill:#d7ef87;transform-origin:42px 42px;animation:sp-pop 560ms cubic-bezier(.34,1.56,.64,1) both}
+.sp-u{fill:none;stroke:#092f2b;stroke-width:5;stroke-linecap:round;stroke-dasharray:120;stroke-dashoffset:120;
+  animation:sp-draw 620ms cubic-bezier(.65,0,.35,1) 330ms forwards}
+.sp-dot{fill:#092f2b;transform-box:fill-box;transform-origin:center;opacity:0;
+  animation:sp-drop 460ms cubic-bezier(.34,1.56,.64,1) 880ms forwards}
+.sp-ring{position:absolute;inset:0;border-radius:30px 30px 10px 30px;border:2px solid #d7ef87;opacity:0;
+  animation:sp-ring 900ms ease-out 1150ms forwards}
+.sp-word{text-align:center;color:#fff;opacity:0;transform:translateY(12px);animation:sp-rise 520ms cubic-bezier(.2,.8,.2,1) 1000ms forwards}
+.sp-word b{display:block;font-size:34px;font-weight:700;line-height:1.1}
+.sp-word small{display:block;margin-top:8px;font:500 11px/1 system-ui,sans-serif;color:#d7ef87;letter-spacing:.7em;
+  padding-inline-start:.7em;animation:sp-track 900ms cubic-bezier(.2,.8,.2,1) 1080ms both}
+.sp-bar{width:132px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.sp-bar i{display:block;height:100%;width:100%;background:#d7ef87;border-radius:3px;transform:scaleX(0);transform-origin:right;
+  animation:sp-load 1600ms cubic-bezier(.4,0,.2,1) 150ms forwards}
+.sp-skip{position:absolute;bottom:calc(26px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;
+  font:400 12px/1 system-ui,sans-serif;color:rgba(234,240,227,.45);opacity:0;animation:sp-rise 400ms ease 1400ms forwards}
+@keyframes sp-pop{0%{transform:scale(.35) rotate(-14deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes sp-draw{to{stroke-dashoffset:0}}
+@keyframes sp-drop{0%{opacity:0;transform:translateY(-26px) rotate(45deg) scale(.6)}100%{opacity:1;transform:rotate(45deg)}}
+@keyframes sp-ring{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(1.85)}}
+@keyframes sp-rise{to{opacity:1;transform:none}}
+@keyframes sp-track{from{letter-spacing:1.4em;opacity:0}to{letter-spacing:.7em;opacity:1}}
+@keyframes sp-load{to{transform:scaleX(1)}}
+@keyframes sp-failsafe{to{visibility:hidden;opacity:0;pointer-events:none}}
+html.splashing,html.splashing body{overflow:hidden}
+html.splashing .rise{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){.splash{display:none}}
 </style>
 </head>
 <body id="top">
+<div id="splash" class="splash" aria-hidden="true">
+  <div class="sp-stage">
+    <div class="sp-logo">
+      <svg viewBox="0 0 84 84" role="presentation" focusable="false">
+        <path class="sp-tile" d="M28 0H56A28 28 0 0 1 84 28V74A10 10 0 0 1 74 84H28A28 28 0 0 1 0 56V28A28 28 0 0 1 28 0Z"/>
+        <path class="sp-u" d="M20 21V32A22 22 0 0 0 64 32V21"/>
+        <rect class="sp-dot" x="37.5" y="61.5" width="9" height="9" rx="2.5"/>
+      </svg>
+      <span class="sp-ring"></span>
+    </div>
+    <div class="sp-word"><b>بشارة</b><small>BISHARA</small></div>
+    <div class="sp-bar"><i></i></div>
+  </div>
+  <div class="sp-skip">المس للمتابعة</div>
+</div>
+<script>
+/* تظهر المقدمة مرة واحدة في كل زيارة، وتُتخطّى بلمسة، ولا تظهر لمن فعّل
+   «تقليل الحركة». تنتهي بعد ٢٫٣ ثانية على الأقل وحين يكتمل تحميل الصفحة،
+   وبحد أقصى ٣٫٨ ثوانٍ. وإن تعطّل هذا الكود، تخفيها CSS بعد ٥ ثوانٍ. */
+(function(){
+  var el = document.getElementById("splash"), root = document.documentElement;
+  if(!el) return;
+  var skip = false;
+  try{ skip = sessionStorage.getItem("bishara_splash") === "1"; }catch(e){}
+  try{ if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) skip = true; }catch(e){}
+  if(skip){ el.parentNode.removeChild(el); return; }
+  try{ sessionStorage.setItem("bishara_splash", "1"); }catch(e){}
+  root.classList.add("splashing");
+  var t0 = Date.now(), MIN = 2300, MAX = 3800, gone = false, timer = null;
+  function out(){
+    if(gone) return; gone = true; clearTimeout(timer);
+    el.classList.add("sp-out");
+    root.classList.remove("splashing");
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 820);
+  }
+  // A tap leaves at once, even when the normal exit is already scheduled.
+  function leave(now){
+    if(gone) return;
+    if(now) return out();
+    if(timer) return;
+    timer = setTimeout(out, Math.max(0, MIN - (Date.now() - t0)));
+  }
+  if(document.readyState === "complete") leave(); else window.addEventListener("load", function(){ leave(); });
+  setTimeout(function(){ leave(); }, MAX);
+  el.addEventListener("click", function(){ leave(true); });
+})();
+</script>
 <a class="skip-link" href="#site-content">انتقل إلى المحتوى</a>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></symbol><symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3Z"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8Zm0 0v5h5M8 12h8M8 16h5"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h7m4 0h5M4 17h3m4 0h9"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol><symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8Z"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="3"/><path d="M8 7V4h8v3M3 12c5 4 13 4 18 0M12 12v4"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5 7a8 8 0 0 1 13-2l2 3M4 16l2 3a8 8 0 0 0 13-2"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4H5v16h5m4-12 4 4-4 4m-5-4h9"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 6-10 6L2 9ZM3 13l9 6 9-6M3 17l9 6 9-6"/></symbol></defs></svg>
 <div id="auth" style="display:none">
