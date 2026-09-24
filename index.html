@@ -500,7 +500,7 @@ footer{border-top:1px solid var(--line);background:var(--canvas);padding:28px 0}
         <div class="mail-top"><span class="tl"></span><span class="tl"></span><span class="tl"></span>
           <span class="mail-from" id="pv-to">إلى: بريدك</span></div>
         <div class="mail-body">
-          <p class="mail-subj" id="pv-subj">بشارة: ٣ وظائف جديدة تناسبك</p>
+          <p class="mail-subj" id="pv-subj">بشارة: لقينا لك ٣ وظائف جديدة</p>
           <p class="mail-meta" id="pv-meta">تصلك كل يوم · الجديد فقط</p>
           <div id="pv-rows"></div>
           <p class="mail-foot" id="pv-foot">الوظائف المستبعدة وأسبابها في جدول المتابعة</p>
@@ -591,7 +591,8 @@ const everyLabel = d => d===1 ? "كل يوم" : d===2 ? "كل يومين"
   : d<=10 ? `كل ${ar(d)} أيام` : `كل ${ar(d)} يومًا`;
 const msgCount = n => n===1 ? "رسالة واحدة" : n===2 ? "رسالتين"
   : n<=10 ? `${ar(n)} رسائل` : `${ar(n)} رسالة`;
-const jobCount = n => n===1 ? "وظيفة جديدة واحدة" : n===2 ? "وظيفتين جديدتين"  : `${ar(n)} وظائف جديدة`;
+const jobCount = n => n===1 ? "وظيفة جديدة واحدة" : n===2 ? "وظيفتين جديدتين"
+  : `${ar(n)} وظائف جديدة`;
 
 /* ---------- regions ---------- */
 const picked = new Set();
@@ -680,7 +681,7 @@ function preview(){
     </div>`).join("");
 
   $("pv-meta").textContent = `تصلك ${everyLabel(freq)} · الجديد فقط`;
-  $("pv-subj").textContent = `بشارة: ${jobCount(Math.min(3,t.length))} تناسبك`;
+  $("pv-subj").textContent = `بشارة: لقينا لك ${jobCount(Math.min(3,t.length))}`;
 }
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 ["email","titles"].forEach(id=>$(id).addEventListener("input",preview));
@@ -740,15 +741,24 @@ $("f").addEventListener("submit",async e=>{
         console.warn("⚠️ تستخدم الرابط التجريبي (webhook-test). يعمل فقط أثناء الضغط على Listen for test event في n8n. للإنتاج استخدم /webhook/ بدون -test.");
       }
       const r=await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      // الخادم يرفض الملف إن لم يكن سيرة ذاتية، ويشرح السبب — نعرضه تحت حقل الملف
+      let res=null; try{ res=await r.clone().json(); }catch(e){}
+      if(res && res.ok===false && res.message){
+        btn.disabled=false; btn.textContent=submitLabel();
+        let ecv=$("e-cv-srv");
+        if(!ecv){ ecv=document.createElement("div"); ecv.id="e-cv-srv"; ecv.className="err"; $("e-cv").after(ecv); }
+        ecv.textContent=res.message; ecv.classList.add("on");
+        ecv.scrollIntoView({block:"center",behavior:"smooth"});
+        return;
+      }
       if(!r.ok) throw new Error("HTTP "+r.status+(r.status===404?" — الوورك فلو غير مُفعّل (Active) أو الرابط خطأ":""));
     }else{
       console.log("WEBHOOK_URL غير مضبوط — بيانات النموذج:",payload);
       await new Promise(r=>setTimeout(r,500));
     }
-    const first = freq===1 ? "غدًا" : freq===2 ? "بعد يومين" : `خلال ${ar(freq)} أيام`;
     $("f").outerHTML=`<div class="done"><div class="done-i">✓</div>
       <h3>تم استلام طلبك</h3>
-      <p>سجّلنا اشتراكك على <b>${esc(email)}</b>. أول تقرير يوصلك ${first} — وبعدها ${everyLabel(freq)}.</p></div>`;
+      <p>سجّلنا اشتراكك على <b>${esc(email)}</b>. بدأنا البحث الآن — أول تقرير يصلك خلال دقائق، وبعدها ${everyLabel(freq)}.</p></div>`;
     window.scrollTo({top:document.querySelector(".done").getBoundingClientRect().top+window.scrollY-120,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
   }catch(err){
     btn.disabled=false; btn.textContent=submitLabel();
@@ -761,12 +771,16 @@ calendar(); preview();
 
 
 /* ═══════════════ الدخول وبوابة التقرير ═══════════════
-   طريقان للدخول:
-   ١) الرابط الخاص في الإيميل: ...?t=TOKEN  (بنقرة واحدة)
-   ٢) تسجيل دخول بالبريد + رمز تحقق من ٦ أرقام
-   كلاهما ينتهي إلى نفس الشيء: رمز الحساب (token) الذي يفتح التقرير. */
+   طريق واحد للدخول: البريد + رمز تحقق من ٦ أرقام. ينتهي إلى رمز الحساب
+   (token) الذي يبقى في هذا المتصفح فقط ليفتح التقرير في الزيارات التالية. */
 
-const QS_TOKEN = new URLSearchParams(location.search).get("t");
+/* الدخول للتقرير بالبريد ورمز التحقق فقط. مفتاح الحساب لا يسافر في أي رابط:
+   الرابط يتسرّب حين يُعاد توجيهه أو تعاينه تطبيقات المحادثة أو تقرؤه إضافات
+   المتصفح، ومن يملكه يرى التقرير كاملًا. رابط قديم فيه ?t= يُتجاهَل ويُمسح من
+   شريط العنوان، ويُطلب الدخول بدلًا منه. */
+const QS = new URLSearchParams(location.search);
+const QS_LEGACY_TOKEN = QS.has("t");
+const QS_LOGIN = QS.has("login") || location.hash === "#login";
 const STORE_KEY = "wadhefti_session";
 
 /* تخزين الجلسة اختياري — لو منعه المتصفح تعمل الصفحة كالمعتاد، فقط
@@ -798,7 +812,8 @@ const dfmt = s => {
              "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
   return `${ar(d.getDate())} ${M[d.getMonth()]}`;
 };
-const jobsWord = n => n===1 ? "وظيفة واحدة" : n===2 ? "وظيفتين"  : n<=10 ? `${ar(n)} وظائف` : `${ar(n)} وظيفة`;
+const jobsWord = n => n===1 ? "وظيفة واحدة" : n===2 ? "وظيفتين"
+  : n<=10 ? `${ar(n)} وظائف` : `${ar(n)} وظيفة`;
 
 /* ─────────────── شاشات الدخول ─────────────── */
 
@@ -1042,7 +1057,7 @@ function listFor(tab){
          <p>كل ما حلّلناه تجاوز حد التطابق — أو لم تبدأ جولاتك بعد.</p></div>`
       : `<div class="p-state"><div class="ic">🔍</div>
          <h2>فرصك القادمة تبدأ من هنا</h2>
-         <p>سيصلك أول تقرير إلى بريدك في الجولة القادمة، وتظهر نتائجه هنا أيضًا.</p></div>`;
+         <p>يصلك أول تقرير إلى بريدك خلال دقائق من اشتراكك، وتظهر نتائجه هنا أيضًا.</p></div>`;
   }
 
   if(P.sort === "score" || rejected){
@@ -1144,8 +1159,12 @@ async function loadReport(){
     return;
   }
   try{
-    const r = await fetch(REPORT_URL + (REPORT_URL.includes("?")?"&":"?") + "t=" + encodeURIComponent(P.token),
-                          {headers:{"Accept":"application/json"}});
+    // المفتاح في جسم الطلب لا في الرابط: الروابط تُحفظ في السجلات وتلتقطها الإضافات.
+    const r = await fetch(REPORT_URL, {
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body: JSON.stringify({ t: P.token })
+    });
     if(!r.ok) throw new Error("HTTP "+r.status);
     const d = await r.json();
     if(!d || d.ok === false){
@@ -1199,13 +1218,8 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
 
 /* البداية: رابط الإيميل، ثم جلسة محفوظة، وإلا فصفحة التسويق كما هي. */
 (function start(){
-  if(QS_TOKEN){
-    P.token = QS_TOKEN;
-    P.source = "link";
-    store.set({ token: QS_TOKEN, email: "" });
-    openPortal();
-    return;
-  }
+  // امسح أي مفتاح أو علامة من شريط العنوان قبل أي شيء — لا يبقى في السجل.
+  if(QS_LEGACY_TOKEN || QS_LOGIN) history.replaceState(null, "", location.pathname);
   const s = store.get();
   if(s && s.token){
     P.token = s.token;
@@ -1214,6 +1228,8 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
     openPortal();
     return;
   }
+  // جاء من زر «افتح تقريرك» في الإيميل، أو من رابط قديم: اعرض الدخول مباشرة.
+  if(QS_LEGACY_TOKEN || QS_LOGIN){ A.email = ""; authEmailScreen(); return; }
   // لا جلسة: تبقى صفحة التسويق ظاهرة، وزر «دخول» في الشريط العلوي يفتح الدخول.
 })();
 </script>
