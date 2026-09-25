@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -213,6 +213,82 @@ input[type=email],input[type=tel]{direction:ltr;text-align:right}
 .chip:hover{border-color:var(--match);color:var(--ink)}
 .chip[aria-pressed=true]{background:var(--accent-soft);border-color:var(--match);color:var(--ink)}
 .chip.add{font-size:11px;border-style:dashed;color:var(--mute)}
+/* region picker */
+.rp{position:relative}
+.rp-btn{width:100%;display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 14px;border:1px solid var(--line);background:var(--canvas);color:var(--ink);border-radius:11px;font:inherit;font-size:14px;text-align:start;cursor:pointer;transition:border-color var(--motion),box-shadow var(--motion)}
+.rp-btn:hover{border-color:var(--match)}
+.rp-btn[aria-expanded=true]{border-color:var(--match);box-shadow:0 0 0 4px color-mix(in srgb,var(--match) 14%,transparent)}
+.rp-btn[aria-invalid=true]{border-color:var(--warn)}
+.rp-pin{color:var(--dawn2);flex-shrink:0}
+.rp-val{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rp-val.ph{color:var(--mute)}
+.rp-count{background:var(--ink);color:var(--paper);font-size:11px;font-weight:600;border-radius:100px;padding:1px 9px;line-height:1.8}
+.rp-count[hidden]{display:none}
+.rp-chev{color:var(--mute);flex-shrink:0;transition:transform var(--motion) var(--ease)}
+.rp-btn[aria-expanded=true] .rp-chev{transform:rotate(180deg)}
+.rp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.rp-tags:empty{display:none}
+.rp-tag{display:inline-flex;align-items:center;gap:4px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--match) 40%,var(--line));color:var(--ink);border-radius:100px;padding-block:3px;padding-inline:11px 4px;font-size:12px;animation:rp-pop .2s var(--ease)}
+.rp-tag.wide{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.rp-tag button{border:0;background:transparent;color:inherit;opacity:.7;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;cursor:pointer;font-size:15px;line-height:1;padding:0}
+.rp-tag button:hover{opacity:1;background:color-mix(in srgb,var(--match) 22%,transparent)}
+@keyframes rp-pop{from{opacity:0;transform:scale(.85)}}
+.rp-back{display:none}
+.rp-pop{position:absolute;inset-inline:0;top:calc(100% + 8px);z-index:60;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-md),0 4px 14px #0b2a2414;overflow:hidden;display:flex;flex-direction:column;transform-origin:top center;animation:rp-in .2s var(--ease)}
+.rp-pop[hidden]{display:none}
+@keyframes rp-in{from{opacity:0;transform:translateY(-6px) scale(.985)}}
+.rp-grab{display:none}
+.rp-head{padding:12px 12px 10px;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.rp-search{position:relative}
+.rp-search svg{position:absolute;inset-inline-start:13px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none}
+.rp-search input[type=search]{padding-inline-start:38px;min-height:42px;background:var(--wash)}
+.rp-hot{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:11px;color:var(--mute)}
+.rp-hot .chip{min-height:30px;padding:3px 11px;border-radius:100px;font-size:11.5px}
+.rp-list{max-height:min(46vh,340px);overflow:auto;overscroll-behavior:contain;padding:6px}
+.rp-opt{position:relative;display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;cursor:pointer;font-size:13.5px;user-select:none;transition:background var(--motion)}
+.rp-opt:hover{background:var(--wash)}
+.rp-opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.rp-box{width:18px;height:18px;border-radius:5px;border:1.5px solid color-mix(in srgb,var(--slate) 50%,var(--line));flex-shrink:0;position:relative;transition:background var(--motion),border-color var(--motion)}
+.rp-box:after{content:"";position:absolute;left:50%;top:45%;width:5px;height:9px;border-right:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:translate(-50%,-50%) rotate(45deg) scale(.4);opacity:0;transition:transform .15s var(--ease),opacity .15s}
+.rp-opt input:checked+.rp-box,.rp-opt input:indeterminate+.rp-box{background:var(--match);border-color:var(--match)}
+.rp-opt input:checked+.rp-box:after{opacity:1;transform:translate(-50%,-50%) rotate(45deg)}
+.rp-opt input:indeterminate+.rp-box:after{opacity:1;top:50%;width:8px;height:0;border-right:0;transform:translate(-50%,-50%)}
+.rp-opt input:focus-visible+.rp-box{outline:2px solid var(--match);outline-offset:2px}
+.rp-txt{display:flex;flex-direction:column;line-height:1.45;min-width:0}
+.rp-txt b{font-weight:600}
+.rp-txt small{font-size:11px;color:var(--mute)}
+.rp-all,.rp-remote{margin-bottom:2px}
+.rp-all{background:var(--wash)}
+.rp-group{border-top:1px solid var(--line);margin-top:6px;padding-top:6px}
+.rp-row{display:flex;align-items:center;gap:4px}
+.rp-row .rp-opt{flex:1;font-weight:600}
+.rp-n{font-size:11px;color:var(--mute);font-weight:400;margin-inline-start:auto}
+.rp-tog{border:0;background:transparent;color:var(--mute);width:34px;height:34px;border-radius:9px;display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+.rp-tog:hover{background:var(--wash);color:var(--ink)}
+.rp-tog svg{transition:transform var(--motion) var(--ease)}
+.rp-tog[aria-expanded=true] svg{transform:rotate(180deg)}
+.rp-cities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding-inline-start:22px}
+.rp-cities[hidden]{display:none}
+.rp-cities .rp-opt{font-size:13px;padding:7px 10px}
+.rp-empty{padding:22px 10px;text-align:center;color:var(--mute);font-size:13px}
+.rp-empty[hidden],.rp-opt[hidden],.rp-group[hidden]{display:none}
+.rp-foot{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--canvas)}
+.rp-sum{flex:1;font-size:12px;color:var(--slate);min-width:0}
+.rp-clear{border:0;background:transparent;color:var(--slate);font:inherit;font-size:12.5px;padding:8px 10px;border-radius:9px;cursor:pointer}
+.rp-clear:hover{background:var(--wash);color:var(--ink)}
+.rp-done{border:0;background:var(--ink);color:var(--paper);font:inherit;font-size:13px;font-weight:500;padding:8px 20px;border-radius:10px;cursor:pointer;min-height:38px}
+.rp-note{font-size:11.5px;color:var(--mute);margin-top:8px;line-height:1.7}
+.rp-note[hidden]{display:none}
+@media(max-width:560px){
+  .rp-back:not([hidden]){display:block;position:fixed;inset:0;z-index:59;background:#061d1acc;animation:rp-fade .2s}
+  .rp-pop{position:fixed;inset:auto 0 0 0;top:auto;max-height:86vh;border-radius:22px 22px 0 0;border-bottom:0;animation:rp-up .28s var(--ease)}
+  .rp-grab{display:block;width:40px;height:4px;border-radius:4px;background:var(--line);margin:9px auto 0}
+  .rp-list{max-height:none;flex:1}
+  .rp-foot{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+}
+@keyframes rp-up{from{transform:translateY(100%)}}
+@keyframes rp-fade{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){.rp-pop,.rp-tag,.rp-back{animation:none!important}}
 .freqs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 .freq{background:var(--canvas);color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:12px 5px;transition:background var(--motion),border-color var(--motion)}
 .freq b{display:block;font-size:12px;font-weight:500}.freq span{font-size:10px;color:var(--mute)}
@@ -587,8 +663,39 @@ html.splashing .rise{animation-play-state:paused}
       </div>
 
       <div class="field">
-        <label>المناطق التي ترغب في العمل بها</label>
-        <div class="chips" id="regions" role="group" aria-label="المناطق"></div>
+        <label id="rp-label">المناطق التي ترغب في العمل بها <span class="sub">— منطقة كاملة، أو مدن بعينها، أو كل المملكة</span></label>
+        <div class="rp" id="rp">
+          <button type="button" class="rp-btn" id="regions" aria-haspopup="dialog" aria-expanded="false" aria-controls="rp-pop" aria-labelledby="rp-label rp-val">
+            <svg class="rp-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <span class="rp-val ph" id="rp-val">اختر المناطق أو المدن</span>
+            <span class="rp-count" id="rp-count" hidden></span>
+            <svg class="rp-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="rp-back" id="rp-back" hidden></div>
+          <div class="rp-pop" id="rp-pop" role="dialog" aria-label="اختيار المناطق" hidden>
+            <div class="rp-grab" aria-hidden="true"></div>
+            <div class="rp-head">
+              <div class="rp-search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input type="search" id="rp-q" placeholder="ابحث عن مدينة أو منطقة" autocomplete="off" aria-label="ابحث عن مدينة أو منطقة">
+              </div>
+              <div class="rp-hot" id="rp-hot"><span>الأكثر طلبًا:</span></div>
+            </div>
+            <div class="rp-list" id="rp-list">
+              <label class="rp-opt rp-all"><input type="checkbox" id="rp-all"><span class="rp-box"></span><span class="rp-txt"><b>كل مناطق المملكة</b><small>بحث واحد يغطي المملكة كلها</small></span></label>
+              <label class="rp-opt rp-remote"><input type="checkbox" id="rp-remote"><span class="rp-box"></span><span class="rp-txt"><b>عن بُعد</b><small>وظائف لا تشترط مدينة</small></span></label>
+              <div id="rp-groups"></div>
+              <div class="rp-empty" id="rp-empty" hidden>لا توجد مدينة بهذا الاسم. جرّب اسم المنطقة.</div>
+            </div>
+            <div class="rp-foot">
+              <span class="rp-sum" id="rp-sum" aria-live="polite">لم تختر شيئًا بعد</span>
+              <button type="button" class="rp-clear" id="rp-clear">مسح</button>
+              <button type="button" class="rp-done" id="rp-done">تم</button>
+            </div>
+          </div>
+        </div>
+        <div class="rp-tags" id="rp-tags"></div>
+        <div class="rp-note" id="rp-note" hidden>اخترت أماكن كثيرة؟ لا بأس. نبدأ كل دورة بأكبر أسواق العمل بينها، ونتناوب على البقية في الدورات التالية.</div>
         <div class="err" id="e-reg">اختر منطقة واحدة على الأقل.</div>
       </div>
 
@@ -744,7 +851,25 @@ const CHALLENGE_URL = "https://tahatest1.app.n8n.cloud/webhook/challenge";
 const SHOW_CHALLENGE = false;
 /* ══════════════════════════════════════════════════════════════════ */
 
-const REGIONS = ["الرياض","الدمام","الخبر","الظهران","الجبيل","جدة","مكة المكرمة","المدينة المنورة","أبها","عن بُعد"];
+// Saudi regions and their main cities, biggest job markets first.
+// Keep in step with SA_REGIONS in the "Build Search Queries" node.
+const SA_REGIONS = [
+  ["منطقة الرياض",["الرياض","الخرج","المجمعة","الدوادمي","وادي الدواسر","الزلفي","شقراء","عفيف"]],
+  ["منطقة مكة المكرمة",["جدة","مكة المكرمة","الطائف","رابغ","القنفذة","الليث"]],
+  ["المنطقة الشرقية",["الدمام","الخبر","الظهران","الجبيل","الأحساء","القطيف","حفر الباطن","رأس تنورة","بقيق","الخفجي"]],
+  ["منطقة المدينة المنورة",["المدينة المنورة","ينبع","العلا","بدر"]],
+  ["منطقة القصيم",["بريدة","عنيزة","الرس"]],
+  ["منطقة عسير",["أبها","خميس مشيط","بيشة","محايل عسير"]],
+  ["منطقة تبوك",["تبوك","نيوم","ضباء","الوجه"]],
+  ["منطقة حائل",["حائل"]],
+  ["منطقة الحدود الشمالية",["عرعر","رفحاء","طريف"]],
+  ["منطقة جازان",["جازان","صبيا","أبو عريش"]],
+  ["منطقة نجران",["نجران","شرورة"]],
+  ["منطقة الباحة",["الباحة","بلجرشي"]],
+  ["منطقة الجوف",["سكاكا","القريات","دومة الجندل"]]
+];
+const RP_ALL = "كل المناطق", RP_REMOTE = "عن بُعد";
+const RP_HOT = ["الرياض","جدة","الدمام","الخبر","مكة المكرمة","المدينة المنورة"];
 const SUGG = ["مهندس ذكاء اصطناعي","محلل بيانات","مطوّر Python","مهندس برمجيات","مطوّر ويب","مهندس ميكانيكي","مهندس مشاريع","مهندس صيانة","محاسب","أخصائي تسويق"];
 const FREQS = [
   {d:1,  t:"كل يوم",   s:"أسرع تنبيه"},
@@ -798,18 +923,141 @@ const jobCount = n => n===1 ? "وظيفة جديدة واحدة" : n===2 ? "وظ
   : `${ar(n)} وظائف جديدة`;
 
 /* ---------- regions ---------- */
+// `picked` is what the form sends. It is rebuilt from the ticks on every change:
+// every city of a region ticked -> the region's name (one search covers it),
+// every city in the kingdom ticked -> "كل المناطق" (one search for all).
 const picked = new Set();
-REGIONS.forEach(r=>{
-  const b=document.createElement("button");
-  b.type="button"; b.className="chip"; b.textContent=r; b.setAttribute("aria-pressed","false");
-  b.onclick=()=>{
-    const on=b.getAttribute("aria-pressed")==="true";
-    b.setAttribute("aria-pressed",String(!on));
-    on?picked.delete(r):picked.add(r);
-    $("e-reg").classList.remove("on"); preview();
-  };
-  $("regions").appendChild(b);
-});
+const rpSel = new Set();          // ticked cities
+let rpRemote = false;
+const RP_CITIES = SA_REGIONS.flatMap(([,c])=>c);
+const rpNorm = s=>String(s).replace(/[ً-ْٰـ]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").replace(/^(منطقه|المنطقه)\s+/,"").trim();
+const rpBoxes = new Map();        // city -> checkbox
+const rpRegionBoxes = [];         // [checkbox, cities, group, toggle, list]
+
+(function buildPicker(){
+  const groups=$("rp-groups");
+  SA_REGIONS.forEach(([reg,cities],gi)=>{
+    const g=document.createElement("div"); g.className="rp-group"; g.dataset.region=reg;
+    const listId="rp-c"+gi, open=gi<3;
+    g.innerHTML=`<div class="rp-row">
+        <label class="rp-opt"><input type="checkbox" data-region="${reg}"><span class="rp-box"></span><span>${reg}</span><span class="rp-n">${cities.length>1?ar(cities.length)+" مدن":"مدينة واحدة"}</span></label>
+        ${cities.length>1?`<button type="button" class="rp-tog" aria-expanded="${open}" aria-controls="${listId}" aria-label="مدن ${reg}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>`:""}
+      </div>
+      <div class="rp-cities" id="${listId}" ${open||cities.length===1?"":"hidden"}></div>`;
+    const list=g.querySelector(".rp-cities");
+    if(cities.length===1) list.hidden=true;   // one-city region: the region row is enough
+    cities.forEach(c=>{
+      const l=document.createElement("label"); l.className="rp-opt"; l.dataset.city=c;
+      l.innerHTML=`<input type="checkbox" data-city="${c}"><span class="rp-box"></span><span>${c}</span>`;
+      const cb=l.querySelector("input");
+      cb.onchange=()=>{ cb.checked?rpSel.add(c):rpSel.delete(c); rpSync(); };
+      rpBoxes.set(c,cb); list.appendChild(l);
+    });
+    const rb=g.querySelector("input[data-region]");
+    rb.onchange=()=>{ const on=!cities.every(c=>rpSel.has(c)); cities.forEach(c=>on?rpSel.add(c):rpSel.delete(c)); rpSync(); };
+    const tog=g.querySelector(".rp-tog");
+    if(tog) tog.onclick=()=>{ const o=tog.getAttribute("aria-expanded")!=="true"; tog.setAttribute("aria-expanded",String(o)); list.hidden=!o; };
+    rpRegionBoxes.push([rb,cities,g,tog,list]);
+    groups.appendChild(g);
+  });
+  RP_HOT.forEach(c=>{
+    const b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=c; b.dataset.hot=c;
+    b.onclick=()=>{ rpSel.has(c)?rpSel.delete(c):rpSel.add(c); rpSync(); };
+    $("rp-hot").appendChild(b);
+  });
+  $("rp-all").onchange=e=>{ rpSel.clear(); if(e.target.checked) RP_CITIES.forEach(c=>rpSel.add(c)); rpSync(); };
+  $("rp-remote").onchange=e=>{ rpRemote=e.target.checked; rpSync(); };
+  $("rp-clear").onclick=()=>{ rpSel.clear(); rpRemote=false; rpSync(); };
+  $("rp-done").onclick=()=>rpClose(true);
+  $("regions").onclick=()=> $("rp-pop").hidden ? rpOpen() : rpClose(false);
+  $("rp-back").onclick=()=>rpClose(false);
+  $("rp-q").oninput=rpFilter;
+  document.addEventListener("pointerdown",e=>{ if(!$("rp-pop").hidden && !$("rp").contains(e.target)) rpClose(false); });
+  $("rp").addEventListener("keydown",e=>{ if(e.key==="Escape" && !$("rp-pop").hidden){ e.preventDefault(); rpClose(true); } });
+})();
+
+function rpOpen(){
+  $("rp-pop").hidden=false; $("rp-back").hidden=false; $("regions").setAttribute("aria-expanded","true");
+  if(window.matchMedia("(pointer:fine)").matches) $("rp-q").focus({preventScroll:true});
+  // Desktop: if the list opens below the fold, bring it into view.
+  requestAnimationFrame(()=>{
+    if(window.matchMedia("(max-width:560px)").matches) return;
+    const r=$("rp-pop").getBoundingClientRect(), over=r.bottom-innerHeight+16;
+    if(over>0) window.scrollBy({top:over,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  });
+}
+function rpClose(focusBack){
+  if($("rp-pop").hidden) return;
+  $("rp-pop").hidden=true; $("rp-back").hidden=true; $("regions").setAttribute("aria-expanded","false");
+  if($("rp-q").value){ $("rp-q").value=""; rpFilter(); }
+  if(focusBack) $("regions").focus();
+}
+function rpFilter(){
+  const q=rpNorm($("rp-q").value);
+  let any=false;
+  rpRegionBoxes.forEach(([rb,cities,g,tog,list])=>{
+    const regHit=q && rpNorm(g.dataset.region).includes(q);
+    let hits=0;
+    list.querySelectorAll(".rp-opt").forEach(l=>{ const h=!q||regHit||rpNorm(l.dataset.city).includes(q); l.hidden=!h; if(h) hits++; });
+    const show=!q||regHit||hits>0;
+    g.hidden=!show; if(show) any=true;
+    if(q && cities.length>1){ list.hidden=false; if(tog) tog.setAttribute("aria-expanded","true"); }
+    if(!q && tog){ list.hidden=tog.getAttribute("aria-expanded")!=="true"; }
+  });
+  const fixed=!q;
+  document.querySelector(".rp-all").hidden=!fixed && !rpNorm("كل مناطق المملكه السعوديه").includes(q);
+  document.querySelector(".rp-remote").hidden=!fixed && !rpNorm("عن بعد ريموت").includes(q);
+  $("rp-empty").hidden=any || !document.querySelector(".rp-all").hidden || !document.querySelector(".rp-remote").hidden;
+}
+function rpPlaces(){
+  const out=[];
+  if(rpSel.size===RP_CITIES.length) out.push(RP_ALL);
+  else SA_REGIONS.forEach(([reg,cities])=>{
+    if(cities.length>1 && cities.every(c=>rpSel.has(c))) out.push(reg);
+    else cities.forEach(c=>{ if(rpSel.has(c)) out.push(c); });
+  });
+  if(rpRemote) out.push(RP_REMOTE);
+  return out;
+}
+function rpSync(){
+  const all=rpSel.size===RP_CITIES.length;
+  $("rp-all").checked=all; $("rp-all").indeterminate=false;
+  $("rp-remote").checked=rpRemote;
+  rpBoxes.forEach((cb,c)=>cb.checked=rpSel.has(c));
+  rpRegionBoxes.forEach(([rb,cities])=>{
+    const n=cities.filter(c=>rpSel.has(c)).length;
+    rb.checked=n===cities.length; rb.indeterminate=n>0&&n<cities.length;
+  });
+  document.querySelectorAll("#rp-hot [data-hot]").forEach(b=>b.setAttribute("aria-pressed",String(rpSel.has(b.dataset.hot))));
+
+  const places=rpPlaces();
+  picked.clear(); places.forEach(p=>picked.add(p));
+  const label=p=>p===RP_ALL?"كل مناطق المملكة":p;
+  const val=$("rp-val");
+  val.textContent=places.length?places.map(label).join("، "):"اختر المناطق أو المدن";
+  val.classList.toggle("ph",!places.length);
+  $("rp-count").hidden=places.length<2; $("rp-count").textContent=ar(places.length);
+  $("rp-sum").textContent=!places.length?"لم تختر شيئًا بعد"
+    : all?"كل مدن المملكة"+(rpRemote?" + عن بُعد":"")
+    : `اخترت ${ar(rpSel.size)} ${rpSel.size===1?"مدينة":rpSel.size===2?"مدينتين":rpSel.size<=10?"مدن":"مدينة"}`+(rpRemote?" + عن بُعد":"");
+
+  const tags=$("rp-tags"); tags.innerHTML="";
+  places.forEach(p=>{
+    const t=document.createElement("span");
+    t.className="rp-tag"+(p===RP_ALL||p.includes("منطقة")||p==="المنطقة الشرقية"?" wide":"");
+    t.innerHTML=`<span>${esc(label(p))}</span><button type="button" aria-label="إزالة ${esc(label(p))}">×</button>`;
+    t.querySelector("button").onclick=()=>{
+      if(p===RP_ALL) rpSel.clear();
+      else if(p===RP_REMOTE) rpRemote=false;
+      else { const r=SA_REGIONS.find(([n])=>n===p); r ? r[1].forEach(c=>rpSel.delete(c)) : rpSel.delete(p); }
+      rpSync(); $("regions").focus();
+    };
+    tags.appendChild(t);
+  });
+  $("rp-note").hidden=all||places.length<=3;
+  if(places.length) $("e-reg").classList.remove("on");
+  preview();
+}
 
 /* ---------- title suggestions ---------- */
 SUGG.forEach(t=>{
@@ -1561,9 +1809,9 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
   const byId = id => document.getElementById(id);
 
   // Theme preference is independent of the existing session storage key.
-  let selectedTheme = null;
-  try { selectedTheme = localStorage.getItem('bishara_ui_theme'); } catch (_) {}
-  if (selectedTheme === 'dark' || selectedTheme === 'light') root.dataset.theme = selectedTheme;
+  // Every visit opens dark, whatever the device setting. The toggle switches
+  // to light for this visit only; nothing is saved, so the next visit is dark again.
+  root.dataset.theme = 'dark';
   function syncTheme() {
     const dark = root.dataset.theme ? root.dataset.theme === 'dark' : systemDark.matches;
     document.querySelectorAll('[data-theme-toggle]').forEach(button => {
@@ -1577,7 +1825,6 @@ if(navLogin) navLogin.addEventListener("click", () => { A.email = ""; authEmailS
   document.querySelectorAll('[data-theme-toggle]').forEach(button => button.addEventListener('click', () => {
     const dark = root.dataset.theme ? root.dataset.theme === 'dark' : systemDark.matches;
     root.dataset.theme = dark ? 'light' : 'dark';
-    try { localStorage.setItem('bishara_ui_theme', root.dataset.theme); } catch (_) {}
     syncTheme();
   }));
   systemDark.addEventListener('change', syncTheme);
